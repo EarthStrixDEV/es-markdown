@@ -3,7 +3,8 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { CopyButton } from '@/components/CopyButton';
 import { MarkdownPreview } from '@/components/MarkdownPreview';
-import { SAMPLE_DOC } from '@/data/sample-doc';
+import { getStrings } from '@/data/i18n';
+import { useLanguage } from '@/i18n/useLanguage';
 import { renderMarkdown } from '@/lib/markdown';
 import {
   applyBlock,
@@ -57,18 +58,38 @@ function CheckIcon() {
 }
 
 export function EditorPage() {
+  const { lang } = useLanguage();
+  const strings = getStrings(lang);
+  const ed = strings.editor;
+
   const taRef = useRef<HTMLTextAreaElement>(null);
   const restoreSel = useRef(false);
   const { present, canUndo, canRedo, input, replace, undo, redo } = useHistory({
-    text: SAMPLE_DOC,
+    text: ed.sampleDoc,
     selStart: 0,
     selEnd: 0,
   });
 
-  const [previewMd, setPreviewMd] = useState(SAMPLE_DOC);
+  const [previewMd, setPreviewMd] = useState(ed.sampleDoc);
   const [view, setView] = useState<'rendered' | 'raw'>('rendered');
   const [saved, setSaved] = useState(false);
   const savedTimer = useRef<number | null>(null);
+
+  /*
+   * Pristine sample-doc swap: when the language changes and the document is
+   * still exactly the previous locale's untouched seed, replace it with the
+   * new locale's sample. Any user-modified document is left alone. `replace`
+   * goes through the history reducer, so undo behaves sanely after the swap.
+   */
+  const prevLang = useRef(lang);
+  useEffect(() => {
+    if (prevLang.current === lang) return;
+    const prevSample = getStrings(prevLang.current).editor.sampleDoc;
+    prevLang.current = lang;
+    if (present.text === prevSample) {
+      replace({ text: ed.sampleDoc, selStart: 0, selEnd: 0 });
+    }
+  }, [lang, present.text, replace, ed.sampleDoc]);
 
   /* Debounced preview: typing on the left renders on the right ~80ms later. */
   useEffect(() => {
@@ -161,30 +182,28 @@ export function EditorPage() {
     <div className="ed-page">
       <div className="ed-head">
         <div>
-          <h1>Markdown Editor</h1>
-          <p>
-            Write Markdown directly — no guided form, just a toolbar, a textbox, and a live
-            preview.
-          </p>
+          <h1>{ed.title}</h1>
+          <p>{ed.subtitle}</p>
         </div>
         <div className="ed-head-actions">
           <button type="button" className="ed-btn-neutral" onClick={handleClear}>
             <ClearIcon />
-            Clear
+            {ed.clear}
           </button>
           <button
             type="button"
             className="ed-btn-pink"
             onClick={handleSave}
-            title="History arrives with the workspace module"
+            title={ed.saveTitle}
           >
             <CheckIcon />
-            {saved ? 'Saved (session)' : 'Save to history'}
+            {saved ? ed.savedFlash : ed.saveToHistory}
           </button>
         </div>
       </div>
 
       <Toolbar
+        strings={strings}
         onInline={onInline}
         onBlock={onBlock}
         onList={onList}
@@ -197,13 +216,13 @@ export function EditorPage() {
 
       <div className="ed-workbench">
         {/* Plain text pane */}
-        <section className="ed-pane" aria-label="Markdown source">
+        <section className="ed-pane" aria-label={ed.ariaLabels.markdownSource}>
           <header className="ed-pane-head">
             <span className="ed-pane-title">
               <span className="ed-dot" aria-hidden="true" />
-              Plain text
+              {ed.pane.plainText}
             </span>
-            <span className="ed-pane-meta">draft.md</span>
+            <span className="ed-pane-meta">{ed.pane.draftFileName}</span>
           </header>
           <textarea
             ref={taRef}
@@ -212,20 +231,20 @@ export function EditorPage() {
             onChange={handleChange}
             onKeyDown={handleKeyDown}
             spellCheck={false}
-            aria-label="Markdown source"
+            aria-label={ed.ariaLabels.markdownSource}
           />
           <footer className="ed-pane-foot">
             <span className="ed-pill">
-              {charCount} chars · {lineCount} lines
+              {charCount} {ed.chars} · {lineCount} {ed.lines}
             </span>
-            <CopyButton label="Copy raw" getText={() => present.text} />
+            <CopyButton label={ed.copyRaw} getText={() => present.text} />
           </footer>
         </section>
 
         {/* Preview pane */}
-        <section className="ed-pane" aria-label="Preview">
+        <section className="ed-pane" aria-label={ed.ariaLabels.preview}>
           <header className="ed-pane-head">
-            <div className="ed-seg" role="tablist" aria-label="Preview mode">
+            <div className="ed-seg" role="tablist" aria-label={ed.ariaLabels.previewMode}>
               <button
                 type="button"
                 role="tab"
@@ -233,7 +252,7 @@ export function EditorPage() {
                 className={`ed-seg-btn${view === 'rendered' ? ' is-active' : ''}`}
                 onClick={() => setView('rendered')}
               >
-                Rendered
+                {ed.pane.rendered}
               </button>
               <button
                 type="button"
@@ -242,10 +261,10 @@ export function EditorPage() {
                 className={`ed-seg-btn${view === 'raw' ? ' is-active' : ''}`}
                 onClick={() => setView('raw')}
               >
-                Raw source
+                {ed.pane.rawSource}
               </button>
             </div>
-            <span className="ed-pane-meta">live preview</span>
+            <span className="ed-pane-meta">{ed.pane.livePreview}</span>
           </header>
           <div className="ed-preview-scroll">
             {view === 'rendered' ? (
@@ -255,8 +274,8 @@ export function EditorPage() {
             )}
           </div>
           <footer className="ed-pane-foot">
-            <span className="ed-pill">Formatted · synced</span>
-            <CopyButton label="Copy HTML" getText={() => renderMarkdown(present.text)} />
+            <span className="ed-pill">{ed.pill}</span>
+            <CopyButton label={ed.copyHtml} getText={() => renderMarkdown(present.text)} />
           </footer>
         </section>
       </div>

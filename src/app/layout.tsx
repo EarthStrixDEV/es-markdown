@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-import { Fraunces, Sora, JetBrains_Mono } from 'next/font/google';
+import { Fraunces, Sora, JetBrains_Mono, Noto_Sans_Thai } from 'next/font/google';
 import { ThemeScript } from '@/theme/theme-script';
+import { LangScript } from '@/i18n/lang-script';
 import { AppShell } from '@/components/AppShell';
 import '@/theme/tokens.css';
 import './globals.css';
@@ -24,6 +25,12 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains-mono',
 });
 
+const notoSansThai = Noto_Sans_Thai({
+  subsets: ['thai'],
+  weight: 'variable',
+  variable: '--font-noto-thai',
+});
+
 export const metadata: Metadata = {
   title: 'ES Markdown',
   description:
@@ -37,10 +44,11 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fraunces.variable} ${sora.variable} ${jetbrainsMono.variable}`}
+      className={`${fraunces.variable} ${sora.variable} ${jetbrainsMono.variable} ${notoSansThai.variable}`}
     >
       <head>
         <ThemeScript />
+        <LangScript />
       </head>
       <body>
         <AppShell>{children}</AppShell>

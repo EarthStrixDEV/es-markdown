@@ -3,13 +3,15 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from '@/theme/useTheme';
+import { useLanguage } from '@/i18n/useLanguage';
+import { getStrings } from '@/data/i18n';
 import './AppShell.css';
 
 const NAV_ITEMS = [
-  { href: '/', label: 'Home' },
-  { href: '/markdown', label: 'Markdown' },
-  { href: '/editor', label: 'Editor' },
-  { href: '/agentic', label: 'Agentic' },
+  { href: '/', key: 'home' },
+  { href: '/markdown', key: 'markdown' },
+  { href: '/editor', key: 'editor' },
+  { href: '/agentic', key: 'agentic' },
 ] as const;
 
 function isActive(pathname: string, href: string): boolean {
@@ -61,6 +63,9 @@ function GearIcon() {
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { theme, toggle } = useTheme();
+  const { lang, setLanguage } = useLanguage();
+  const strings = getStrings(lang);
+  const shell = strings.shell;
 
   return (
     <div className="shell">
@@ -69,30 +74,48 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <span className="shell-logo" aria-hidden="true">
             M
           </span>
-          ES Markdown
+          {shell.brand}
         </div>
-        <nav className="shell-nav" aria-label="Main">
-          {NAV_ITEMS.map(({ href, label }) => (
+        <nav className="shell-nav" aria-label={shell.navAriaLabel}>
+          {NAV_ITEMS.map(({ href, key }) => (
             <Link
               key={href}
               href={href}
               className={`shell-nav-item${isActive(pathname, href) ? ' is-active' : ''}`}
               aria-current={isActive(pathname, href) ? 'page' : undefined}
             >
-              {label}
+              {shell.nav[key]}
             </Link>
           ))}
         </nav>
         <div className="shell-actions">
+          <div className="shell-lang" role="group" aria-label={shell.lang.label}>
+            <button
+              type="button"
+              className={`shell-lang-seg${lang === 'en' ? ' is-active' : ''}`}
+              aria-pressed={lang === 'en'}
+              onClick={() => setLanguage('en')}
+            >
+              {shell.lang.en}
+            </button>
+            <button
+              type="button"
+              className={`shell-lang-seg${lang === 'th' ? ' is-active' : ''}`}
+              aria-pressed={lang === 'th'}
+              onClick={() => setLanguage('th')}
+            >
+              {shell.lang.th}
+            </button>
+          </div>
           <button
             type="button"
             className="shell-icon-btn"
             onClick={toggle}
-            aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+            aria-label={theme === 'dark' ? shell.themeToggle.toLight : shell.themeToggle.toDark}
           >
             {theme === 'dark' ? <MoonIcon /> : <SunIcon />}
           </button>
-          <button type="button" className="shell-icon-btn" aria-label="Settings">
+          <button type="button" className="shell-icon-btn" aria-label={shell.settingsLabel}>
             <GearIcon />
           </button>
           <div className="shell-avatar" aria-hidden="true" />

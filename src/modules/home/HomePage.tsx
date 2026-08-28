@@ -1,10 +1,15 @@
 'use client';
 
+import { Fragment } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { getStrings } from '@/data/i18n';
+import type { Locale } from '@/data/i18n/types';
+import { useLanguage } from '@/i18n/useLanguage';
 import { FakeWindow } from './FakeWindow';
 import './home.css';
 
+/* Proper nouns — brand names stay hardcoded, they don't localize. */
 const MODEL_LOGOS = [
   { name: 'ChatGPT', className: 'is-chatgpt' },
   { name: 'Gemini', className: 'is-gemini' },
@@ -14,91 +19,52 @@ const MODEL_LOGOS = [
   { name: 'Perplexity', className: 'is-perplexity' },
 ] as const;
 
-const STATS = [
-  { value: '11', caption: 'guided fields per topic' },
-  { value: '4', caption: 'output formats' },
-  { value: '0', caption: 'blank sections, ever' },
-] as const;
+/*
+ * Presentation-only companions to the dictionary arrays (same order):
+ * feature-card icons, testimonial avatar tints, and the per-locale emphasis
+ * substrings (<em>/<span>/<code> wrapping stays in the component — the
+ * dictionary holds plain text, per the types.ts doc comments).
+ */
+const WHY_ICONS = [PuzzleIcon, EyeIcon, ShieldIcon] as const;
+const TESTIMONIAL_AVATARS = ['is-pink', 'is-blue', 'is-gold'] as const;
+const HERO_EM: Record<Locale, string> = { en: 'Typing it', th: 'แค่พิมพ์' };
+const FACT_EMPHASIS: Record<Locale, readonly string[]> = {
+  en: ['tolerate', 'expect'],
+  th: ['อ่าน', 'คาดหวัง'],
+};
+/** Filename kept literal in every locale's testimonial quote. */
+const TESTIMONIAL_CODE_TOKEN = 'prompt-template.md';
 
-const WHY_CARDS = [
-  {
-    icon: <PuzzleIcon />,
-    title: 'Every section, every time',
-    copy: 'Skip a field and ES Markdown fills it with a sensible default instead of leaving a gap. Answer 5 of 11 fields, still get a complete document.',
-  },
-  {
-    icon: <EyeIcon />,
-    title: 'See it build, live',
-    copy: 'The Markdown preview updates as you type — real formatting or plain text, your call. No surprise when you finally hit copy.',
-  },
-  {
-    icon: <ShieldIcon />,
-    title: 'Guardrails baked in',
-    copy: "Every output closes with an instruction to ask before guessing, and three ready-made follow-ups for when the first answer isn't quite right.",
-  },
-] as const;
+/** Wrap the first occurrence of `token` in `text` with `render(token)`. */
+function wrapToken(
+  text: string,
+  token: string,
+  render: (token: string) => React.ReactNode,
+): React.ReactNode {
+  const i = text.indexOf(token);
+  if (i === -1) return text;
+  return (
+    <>
+      {text.slice(0, i)}
+      {render(token)}
+      {text.slice(i + token.length)}
+    </>
+  );
+}
 
-const FACTS = [
-  {
-    key: '#1',
-    strong: 'Markdown is the most common structuring format',
-    rest: ' in the instruction-tuning data used to train modern chat models — headings and lists map directly to how they were taught to parse intent.',
-  },
-  {
-    key: '↓',
-    strong: 'Clear section headers reduce ambiguity',
-    rest: ' — models answer the "## Constraints" block differently than a constraint buried mid-paragraph.',
-  },
-  {
-    key: '⇄',
-    strong: 'It round-trips cleanly',
-    rest: ' between chat, docs, and code — the same file works as a prompt, a SKILL.md, or a README with no reformatting.',
-  },
-] as const;
-
-const TESTIMONIALS = [
-  {
-    category: 'Developer',
-    quote: (
-      <>
-        I used to keep a <code className="testimonial-code">prompt-template.md</code>{' '}
-        I&apos;d copy-paste and hand-edit every time. This is that file, except it fills
-        itself in and never lets me forget the guardrail section.
-      </>
-    ),
-    initials: 'NT',
-    avatarClass: 'is-pink',
-    name: 'Nut T.',
-    role: 'Backend developer, fintech',
-  },
-  {
-    category: 'Power AI user',
-    quote: (
-      <>
-        The default values are the real feature. I can see exactly what gets filled in if
-        I skip a field — so leaving something blank never feels like a gamble.
-      </>
-    ),
-    initials: 'PW',
-    avatarClass: 'is-blue',
-    name: 'Ploy W.',
-    role: 'Daily Claude + GPT user',
-  },
-  {
-    category: 'AI engineer',
-    quote: (
-      <>
-        We standardized our internal SKILL.md files on this. Junior folks who&apos;ve
-        never hand-rolled a system prompt now ship ones with the same structure as our
-        senior agents.
-      </>
-    ),
-    initials: 'KS',
-    avatarClass: 'is-gold',
-    name: 'Kritt S.',
-    role: 'ML platform engineer',
-  },
-] as const;
+/** Split on `\n` and render each line via `mapLine`, joined with <br />. */
+function renderLines(
+  text: string,
+  mapLine: (line: string) => React.ReactNode,
+): React.ReactNode {
+  const lines = text.split('\n');
+  return lines.map((line, i) => (
+    <Fragment key={i}>
+      {mapLine(line)}
+      {i < lines.length - 1 && <br />}
+    </Fragment>
+  ));
+}
 
 function PuzzleIcon() {
   return (
@@ -149,11 +115,17 @@ function ShieldIcon() {
 
 export function HomePage() {
   const router = useRouter();
+  const { lang } = useLanguage();
+  const strings = getStrings(lang);
+  const home = strings.home;
 
   function handleGenerate(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     router.push('/markdown');
   }
+
+  const heroEm = HERO_EM[strings.locale];
+  const factEmphasis = FACT_EMPHASIS[strings.locale];
 
   return (
     <div className="home">
@@ -163,41 +135,35 @@ export function HomePage() {
           <div>
             <div className="home-eyebrow-row">
               <span className="home-eyebrow-dot" aria-hidden="true" />
-              <span className="home-eyebrow">Form in, Markdown out</span>
+              <span className="home-eyebrow">{home.hero.eyebrow}</span>
             </div>
             <h1 className="home-h1">
-              You know what
-              <br />
-              you need. <em>Typing it</em>
-              <br />
-              is the hard part.
+              {renderLines(home.hero.title, (line) =>
+                wrapToken(line, heroEm, (t) => <em>{t}</em>),
+              )}
             </h1>
-            <p className="home-hero-sub">
-              Answer a few plain questions — ES Markdown assembles the headings,
-              guardrails, and structure AI models actually parse well. No blank page, no
-              forgotten section.
-            </p>
+            <p className="home-hero-sub">{home.hero.sub}</p>
 
             <form className="home-cta-pill" onSubmit={handleGenerate}>
               <input
                 type="text"
                 className="home-cta-input"
-                placeholder={'What are you building? e.g. "landing page for a coffee roastery"'}
-                aria-label="What are you building?"
+                placeholder={home.hero.ctaPlaceholder}
+                aria-label={home.hero.ctaAriaLabel}
               />
               <button type="submit" className="home-cta-button">
-                Generate →
+                {home.hero.ctaButton}
               </button>
             </form>
             <div className="home-kbd-row">
               <span>
-                <kbd className="home-kbd">⌘K</kbd> to jump in anywhere
+                <kbd className="home-kbd">{home.hero.kbd}</kbd> {home.hero.kbdHint}
               </span>
-              <span>Website · Data summary · Agent instruction · Proposal</span>
+              <span>{home.hero.exampleFormats}</span>
             </div>
 
             <div className="home-stats">
-              {STATS.map(({ value, caption }) => (
+              {home.stats.map(({ value, caption }) => (
                 <div key={caption}>
                   <div className="home-stat-value">{value}</div>
                   <div className="home-stat-caption">{caption}</div>
@@ -211,8 +177,8 @@ export function HomePage() {
       </section>
 
       {/* ===== Logo strip ===== */}
-      <section className="home-logos" aria-label="Supported AI models">
-        <p className="home-logos-caption">Formatted for the models you already use</p>
+      <section className="home-logos" aria-label={home.logosAriaLabel}>
+        <p className="home-logos-caption">{home.logosCaption}</p>
         <div className="home-logos-mask">
           <div className="home-logos-track">
             {[false, true].map((isClone) => (
@@ -237,25 +203,23 @@ export function HomePage() {
       <section className="home-why">
         <div className="home-container">
           <div className="home-why-intro">
-            <span className="home-eyebrow">Why ES Markdown</span>
-            <h2 className="home-h2">
-              The gap isn&apos;t your first prompt. It&apos;s the follow-up you never
-              send.
-            </h2>
-            <p className="home-why-lede">
-              General users get one shot and stop at &quot;okay, thanks.&quot; Power
-              users iterate. We close that gap by writing the structure for you — and
-              handing you the follow-ups too.
-            </p>
+            <span className="home-eyebrow">{home.why.eyebrow}</span>
+            <h2 className="home-h2">{home.why.heading}</h2>
+            <p className="home-why-lede">{home.why.lede}</p>
           </div>
           <div className="home-why-grid">
-            {WHY_CARDS.map(({ icon, title, copy }) => (
-              <div key={title} className="home-why-card">
-                <div className="home-why-icon">{icon}</div>
-                <h3 className="home-why-card-title">{title}</h3>
-                <p className="home-why-card-copy">{copy}</p>
-              </div>
-            ))}
+            {home.featureCards.map(({ title, copy }, i) => {
+              const Icon = WHY_ICONS[i] ?? PuzzleIcon;
+              return (
+                <div key={title} className="home-why-card">
+                  <div className="home-why-icon">
+                    <Icon />
+                  </div>
+                  <h3 className="home-why-card-title">{title}</h3>
+                  <p className="home-why-card-copy">{copy}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -265,15 +229,18 @@ export function HomePage() {
         <div className="home-container">
           <div className="home-facts-slab">
             <div>
-              <span className="home-eyebrow">Did you know</span>
+              <span className="home-eyebrow">{home.facts.eyebrow}</span>
               <h2 className="home-facts-headline">
-                AI models don&apos;t just <span>tolerate</span> Markdown.
-                <br />
-                They were trained to <span>expect</span> it.
+                {renderLines(home.facts.headline, (line) => {
+                  const token = factEmphasis.find((t) => line.includes(t));
+                  return token
+                    ? wrapToken(line, token, (t) => <span>{t}</span>)
+                    : line;
+                })}
               </h2>
             </div>
             <div className="home-facts-list">
-              {FACTS.map(({ key, strong, rest }) => (
+              {home.facts.items.map(({ key, strong, rest }) => (
                 <div key={key} className="home-fact-row">
                   <div className="home-fact-key" aria-hidden="true">
                     {key}
@@ -293,16 +260,23 @@ export function HomePage() {
       <section className="home-testimonials">
         <div className="home-container">
           <div className="home-testimonials-intro">
-            <span className="home-eyebrow">From people who write prompts for a living</span>
-            <h2 className="home-h2">What builders, power users, and engineers say</h2>
+            <span className="home-eyebrow">{home.testimonials.eyebrow}</span>
+            <h2 className="home-h2">{home.testimonials.heading}</h2>
           </div>
           <div className="home-testimonials-grid">
-            {TESTIMONIALS.map(({ category, quote, initials, avatarClass, name, role }) => (
+            {home.testimonials.items.map(({ category, quote, initials, name, role }, i) => (
               <div key={name} className="testimonial-card">
                 <span className="testimonial-pill">{category}</span>
-                <p className="testimonial-quote">{quote}</p>
+                <p className="testimonial-quote">
+                  {wrapToken(quote, TESTIMONIAL_CODE_TOKEN, (t) => (
+                    <code className="testimonial-code">{t}</code>
+                  ))}
+                </p>
                 <div className="testimonial-person">
-                  <div className={`testimonial-avatar ${avatarClass}`} aria-hidden="true">
+                  <div
+                    className={`testimonial-avatar ${TESTIMONIAL_AVATARS[i] ?? 'is-pink'}`}
+                    aria-hidden="true"
+                  >
                     {initials}
                   </div>
                   <div>
@@ -323,13 +297,13 @@ export function HomePage() {
             <span className="home-footer-logo" aria-hidden="true">
               M
             </span>
-            ES Markdown — write once, format for none.
+            {home.footer.tagline}
           </div>
-          <nav className="home-footer-links" aria-label="Footer">
-            <Link href="/markdown">Markdown</Link>
-            <Link href="/agentic">Agentic</Link>
-            <a href="#">GitHub</a>
-            <a href="#">Privacy</a>
+          <nav className="home-footer-links" aria-label={home.footer.ariaLabel}>
+            <Link href="/markdown">{home.footer.links.markdown}</Link>
+            <Link href="/agentic">{home.footer.links.agentic}</Link>
+            <a href="#">{home.footer.links.github}</a>
+            <a href="#">{home.footer.links.privacy}</a>
           </nav>
         </div>
       </footer>

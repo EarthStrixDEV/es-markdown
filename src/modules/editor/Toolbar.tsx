@@ -1,9 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import type { Strings } from '@/data/i18n';
 import type { BlockStyle, InlineMarker, ListKind, SnippetKind } from './actions';
 
 interface ToolbarProps {
+  strings: Strings;
   onInline: (marker: InlineMarker) => void;
   onBlock: (style: BlockStyle) => void;
   onList: (kind: ListKind) => void;
@@ -144,23 +146,21 @@ function TbButton({ label, onClick, disabled, wide, children }: TbButtonProps) {
   );
 }
 
-const BLOCK_OPTIONS: { value: BlockStyle; label: string }[] = [
-  { value: 'p', label: 'Paragraph' },
-  { value: 'h1', label: 'Heading 1' },
-  { value: 'h2', label: 'Heading 2' },
-  { value: 'h3', label: 'Heading 3' },
-];
+const BLOCK_VALUES: BlockStyle[] = ['p', 'h1', 'h2', 'h3'];
 
 export function Toolbar(props: ToolbarProps) {
-  const { onInline, onBlock, onList, onSnippet, onUndo, onRedo, canUndo, canRedo } = props;
+  const { strings, onInline, onBlock, onList, onSnippet, onUndo, onRedo, canUndo, canRedo } =
+    props;
+  const tb = strings.editor.toolbar;
+  const aria = strings.editor.ariaLabels;
   const [blockValue, setBlockValue] = useState<BlockStyle>('p');
 
   return (
-    <div className="tb" role="toolbar" aria-label="Formatting">
+    <div className="tb" role="toolbar" aria-label={aria.toolbar}>
       <span className="tb-select-wrap">
         <select
           className="tb-select"
-          aria-label="Block style"
+          aria-label={aria.blockStyle}
           value={blockValue}
           onChange={(e) => {
             const style = e.target.value as BlockStyle;
@@ -168,9 +168,9 @@ export function Toolbar(props: ToolbarProps) {
             onBlock(style);
           }}
         >
-          {BLOCK_OPTIONS.map((o) => (
-            <option key={o.value} value={o.value}>
-              {o.label}
+          {BLOCK_VALUES.map((value) => (
+            <option key={value} value={value}>
+              {strings.editor.blockOptions[value]}
             </option>
           ))}
         </select>
@@ -178,62 +178,62 @@ export function Toolbar(props: ToolbarProps) {
 
       <Divider />
 
-      <TbButton label="Bold" onClick={() => onInline('**')}>
+      <TbButton label={tb.bold} onClick={() => onInline('**')}>
         <span className="tb-glyph tb-glyph-b">B</span>
       </TbButton>
-      <TbButton label="Italic" onClick={() => onInline('*')}>
+      <TbButton label={tb.italic} onClick={() => onInline('*')}>
         <span className="tb-glyph tb-glyph-i">I</span>
       </TbButton>
-      <TbButton label="Strikethrough" onClick={() => onInline('~~')}>
+      <TbButton label={tb.strikethrough} onClick={() => onInline('~~')}>
         <span className="tb-glyph tb-glyph-s">S</span>
       </TbButton>
-      <TbButton label="Inline code" onClick={() => onInline('`')}>
+      <TbButton label={tb.inlineCode} onClick={() => onInline('`')}>
         <span className="tb-glyph tb-glyph-code">&lt;/&gt;</span>
       </TbButton>
 
       <Divider />
 
-      <TbButton label="Heading 2" onClick={() => onBlock('h2')}>
+      <TbButton label={tb.heading2} onClick={() => onBlock('h2')}>
         <span className="tb-glyph tb-glyph-h">H</span>
       </TbButton>
-      <TbButton label="Bullet list" onClick={() => onList('bullet')}>
+      <TbButton label={tb.bullet} onClick={() => onList('bullet')}>
         <BulletIcon />
       </TbButton>
-      <TbButton label="Ordered list" onClick={() => onList('ordered')}>
+      <TbButton label={tb.ordered} onClick={() => onList('ordered')}>
         <span className="tb-glyph tb-glyph-ol">1.</span>
       </TbButton>
-      <TbButton label="Task list" onClick={() => onList('task')}>
+      <TbButton label={tb.task} onClick={() => onList('task')}>
         <TaskIcon />
       </TbButton>
 
       <Divider />
 
-      <TbButton label="Link" onClick={() => onSnippet('link')}>
+      <TbButton label={tb.link} onClick={() => onSnippet('link')}>
         <LinkIcon />
       </TbButton>
-      <TbButton label="Image" onClick={() => onSnippet('image')}>
+      <TbButton label={tb.image} onClick={() => onSnippet('image')}>
         <ImageIcon />
       </TbButton>
-      <TbButton label="Insert table" onClick={() => onSnippet('table')} wide>
+      <TbButton label={tb.table} onClick={() => onSnippet('table')} wide>
         <TableIcon />
-        <span className="tb-wide-label">Table</span>
+        <span className="tb-wide-label">{tb.tableWideLabel}</span>
       </TbButton>
-      <TbButton label="Blockquote" onClick={() => onSnippet('quote')}>
+      <TbButton label={tb.quote} onClick={() => onSnippet('quote')}>
         <QuoteIcon />
       </TbButton>
-      <TbButton label="Code block" onClick={() => onSnippet('codeblock')}>
+      <TbButton label={tb.codeblock} onClick={() => onSnippet('codeblock')}>
         <CodeBlockIcon />
       </TbButton>
-      <TbButton label="Divider" onClick={() => onSnippet('divider')}>
+      <TbButton label={tb.divider} onClick={() => onSnippet('divider')}>
         <DividerIcon />
       </TbButton>
 
       <Divider />
 
-      <TbButton label="Undo" onClick={onUndo} disabled={!canUndo}>
+      <TbButton label={tb.undo} onClick={onUndo} disabled={!canUndo}>
         <UndoIcon />
       </TbButton>
-      <TbButton label="Redo" onClick={onRedo} disabled={!canRedo}>
+      <TbButton label={tb.redo} onClick={onRedo} disabled={!canRedo}>
         <RedoIcon />
       </TbButton>
     </div>

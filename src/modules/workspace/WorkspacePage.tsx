@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { CopyButton } from '@/components/CopyButton';
 import { MarkdownPreview } from '@/components/MarkdownPreview';
 import { getStrings } from '@/data/i18n';
+import { useLanguage } from '@/i18n/useLanguage';
 import { fileNameFor, topicDefaults } from '@/data/topics';
 import { assemble } from '@/lib/assembler';
 import { CompletionMeter } from './CompletionMeter';
@@ -49,7 +50,8 @@ function CheckIcon() {
 }
 
 export function WorkspacePage() {
-  const strings = getStrings('en');
+  const { lang } = useLanguage();
+  const strings = getStrings(lang);
   const { state, selectTopic, selectFormat, setField, resetTopic, save, restore } =
     useWorkspaceState();
   const [view, setView] = useState<'formatted' | 'plain'>('formatted');

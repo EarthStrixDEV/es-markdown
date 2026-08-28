@@ -16,7 +16,7 @@ export function CompletionMeter({ strings, fields, charCount }: CompletionMeterP
   return (
     <div className="ws-meter">
       <span className="ws-chip">
-        {charCount.toLocaleString('en-US')} {strings.ui.chars}
+        {charCount.toLocaleString(strings.locale === 'th' ? 'th-TH' : 'en-US')} {strings.ui.chars}
       </span>
       <span className="ws-chip ws-chip-pink">
         {written}/{FIELD_KEYS.length} {strings.ui.written}

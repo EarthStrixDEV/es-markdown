@@ -68,6 +68,39 @@
   gap: 14px;
 }
 
+.shell-lang {
+  display: flex;
+  gap: 4px;
+  background: var(--surface-2);
+  padding: 4px;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-inset);
+}
+
+.shell-lang-seg {
+  min-width: 34px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 9px;
+  color: var(--text-3);
+  font-weight: 600;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shell-lang-seg.is-active {
+  background: var(--pink);
+  color: var(--on-pink);
+  box-shadow: var(--shadow-outset-sm);
+}
+
+.shell-lang-seg:focus-visible {
+  outline: 2px solid var(--pink-deep);
+  outline-offset: 1px;
+}
+
 .shell-icon-btn {
   width: 36px;
   height: 36px;

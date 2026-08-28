@@ -8,6 +8,199 @@ import type { Strings } from './types';
 export const en: Strings = {
   locale: 'en',
 
+  shell: {
+    brand: 'ES Markdown',
+    nav: {
+      home: 'Home',
+      markdown: 'Markdown',
+      editor: 'Editor',
+      agentic: 'Agentic',
+    },
+    navAriaLabel: 'Main',
+    themeToggle: {
+      toLight: 'Switch to light theme',
+      toDark: 'Switch to dark theme',
+    },
+    settingsLabel: 'Settings',
+    lang: { label: 'Language', en: 'EN', th: 'TH' },
+  },
+
+  home: {
+    hero: {
+      eyebrow: 'Form in, Markdown out',
+      title: 'You know what\nyou need. Typing it\nis the hard part.',
+      sub: 'Answer a few plain questions — ES Markdown assembles the headings, guardrails, and structure AI models actually parse well. No blank page, no forgotten section.',
+      ctaPlaceholder: 'What are you building? e.g. "landing page for a coffee roastery"',
+      ctaAriaLabel: 'What are you building?',
+      ctaButton: 'Generate →',
+      kbd: '⌘K',
+      kbdHint: 'to jump in anywhere',
+      exampleFormats: 'Website · Data summary · Agent instruction · Proposal',
+    },
+    stats: [
+      { value: '11', caption: 'guided fields per topic' },
+      { value: '4', caption: 'output formats' },
+      { value: '0', caption: 'blank sections, ever' },
+    ],
+    logosAriaLabel: 'Supported AI models',
+    logosCaption: 'Formatted for the models you already use',
+    why: {
+      eyebrow: 'Why ES Markdown',
+      heading: "The gap isn't your first prompt. It's the follow-up you never send.",
+      lede: 'General users get one shot and stop at "okay, thanks." Power users iterate. We close that gap by writing the structure for you — and handing you the follow-ups too.',
+    },
+    featureCards: [
+      {
+        title: 'Every section, every time',
+        copy: 'Skip a field and ES Markdown fills it with a sensible default instead of leaving a gap. Answer 5 of 11 fields, still get a complete document.',
+      },
+      {
+        title: 'See it build, live',
+        copy: 'The Markdown preview updates as you type — real formatting or plain text, your call. No surprise when you finally hit copy.',
+      },
+      {
+        title: 'Guardrails baked in',
+        copy: "Every output closes with an instruction to ask before guessing, and three ready-made follow-ups for when the first answer isn't quite right.",
+      },
+    ],
+    facts: {
+      eyebrow: 'Did you know',
+      headline: "AI models don't just tolerate Markdown.\nThey were trained to expect it.",
+      items: [
+        {
+          key: '#1',
+          strong: 'Markdown is the most common structuring format',
+          rest: ' in the instruction-tuning data used to train modern chat models — headings and lists map directly to how they were taught to parse intent.',
+        },
+        {
+          key: '↓',
+          strong: 'Clear section headers reduce ambiguity',
+          rest: ' — models answer the "## Constraints" block differently than a constraint buried mid-paragraph.',
+        },
+        {
+          key: '⇄',
+          strong: 'It round-trips cleanly',
+          rest: ' between chat, docs, and code — the same file works as a prompt, a SKILL.md, or a README with no reformatting.',
+        },
+      ],
+    },
+    testimonials: {
+      eyebrow: 'From people who write prompts for a living',
+      heading: 'What builders, power users, and engineers say',
+      items: [
+        {
+          category: 'Developer',
+          quote:
+            "I used to keep a prompt-template.md I'd copy-paste and hand-edit every time. This is that file, except it fills itself in and never lets me forget the guardrail section.",
+          initials: 'NT',
+          name: 'Nut T.',
+          role: 'Backend developer, fintech',
+        },
+        {
+          category: 'Power AI user',
+          quote:
+            'The default values are the real feature. I can see exactly what gets filled in if I skip a field — so leaving something blank never feels like a gamble.',
+          initials: 'PW',
+          name: 'Ploy W.',
+          role: 'Daily Claude + GPT user',
+        },
+        {
+          category: 'AI engineer',
+          quote:
+            "We standardized our internal SKILL.md files on this. Junior folks who've never hand-rolled a system prompt now ship ones with the same structure as our senior agents.",
+          initials: 'KS',
+          name: 'Kritt S.',
+          role: 'ML platform engineer',
+        },
+      ],
+    },
+    footer: {
+      tagline: 'ES Markdown — write once, format for none.',
+      ariaLabel: 'Footer',
+      links: {
+        markdown: 'Markdown',
+        agentic: 'Agentic',
+        github: 'GitHub',
+        privacy: 'Privacy',
+      },
+    },
+  },
+
+  editor: {
+    title: 'Markdown Editor',
+    subtitle:
+      'Write Markdown directly — no guided form, just a toolbar, a textbox, and a live preview.',
+    clear: 'Clear',
+    saveToHistory: 'Save to history',
+    savedFlash: 'Saved (session)',
+    saveTitle: 'History arrives with the workspace module',
+    pane: {
+      plainText: 'Plain text',
+      draftFileName: 'draft.md',
+      livePreview: 'live preview',
+      rendered: 'Rendered',
+      rawSource: 'Raw source',
+    },
+    pill: 'Formatted · synced',
+    chars: 'chars',
+    lines: 'lines',
+    copyRaw: 'Copy raw',
+    copyHtml: 'Copy HTML',
+    ariaLabels: {
+      markdownSource: 'Markdown source',
+      preview: 'Preview',
+      previewMode: 'Preview mode',
+      toolbar: 'Formatting',
+      blockStyle: 'Block style',
+    },
+    blockOptions: {
+      p: 'Paragraph',
+      h1: 'Heading 1',
+      h2: 'Heading 2',
+      h3: 'Heading 3',
+    },
+    toolbar: {
+      bold: 'Bold',
+      italic: 'Italic',
+      strikethrough: 'Strikethrough',
+      inlineCode: 'Inline code',
+      heading2: 'Heading 2',
+      bullet: 'Bullet list',
+      ordered: 'Ordered list',
+      task: 'Task list',
+      link: 'Link',
+      image: 'Image',
+      table: 'Insert table',
+      tableWideLabel: 'Table',
+      quote: 'Blockquote',
+      codeblock: 'Code block',
+      divider: 'Divider',
+      undo: 'Undo',
+      redo: 'Redo',
+    },
+    sampleDoc: `## Weekly Sync Notes
+
+**Attendees:** Nut, Ploy, Kritt
+
+We reviewed the *coffee roastery* launch timeline and agreed on next steps.
+
+### Action items
+- Finalize hero photography by Friday
+- Draft newsletter copy — [see brief](#)
+- Confirm shipping rates with the courier
+
+| Task | Owner | Due |
+|---|---|---|
+| Photography | Nut | Fri |
+| Newsletter copy | Ploy | Mon |
+| Shipping rates | Kritt | Wed |
+
+> Ship the online store before the next roast batch is ready — that's the real deadline.
+
+Use \`inline code\` for anything referencing a config key or file name.
+`,
+  },
+
   ui: {
     chooseTopic: 'Choose a topic',
     history: 'History',
@@ -27,6 +220,9 @@ export const en: Strings = {
       'Follow-up pack ready: 3 pre-written next messages for when the first draft is close but not quite there — they sit below the divider in the Prompt output, never sent with the main prompt.',
     agentLinkLabel: 'Create Agent',
     agentLinkTagline: '11 fields → AGENT.md, in the Agentic module',
+    timeJustNow: 'just now',
+    timeMinutesAgo: '{n}m ago',
+    timeHoursAgo: '{n}h ago',
   },
 
   formats: {

@@ -9,7 +9,12 @@
     { "id": 4, "title": "Markdown workspace (en.ts DEF content, assembler + tests, form/preview/meter/history)", "owner": "เบล", "deps": [2], "status": "done" },
     { "id": 5, "title": "Agentic module (11 fields, AGENT.md preview, sidebar, static workflow graph)", "owner": "เบล", "deps": [4], "status": "done" },
     { "id": 6, "title": "Responsive breakpoints + light-mode shadow tuning pass (all pages)", "owner": "ออม", "deps": [2, 3, 4, 5], "status": "done" },
-    { "id": 7, "title": "QA vs acceptance criteria (spec §2–§5) + build + unit tests", "owner": "แพร", "deps": [6], "status": "done" }
+    { "id": 7, "title": "QA vs acceptance criteria (spec §2–§5) + build + unit tests", "owner": "แพร", "deps": [6], "status": "done" },
+    { "id": 8, "title": "Extend Strings interface for chrome (shell/home/editor) + extract EN verbatim, widen Locale to en|th", "owner": "เบล", "deps": [7], "status": "done" },
+    { "id": 9, "title": "Thai dictionary th.ts (full Strings) + register in LOCALES", "owner": "เบล", "deps": [8], "status": "done" },
+    { "id": 10, "title": "Language store/useLanguage/lang-script + TH/EN segmented toggle in AppShell + Noto Sans Thai font", "owner": "ออม", "deps": [8], "status": "done" },
+    { "id": 11, "title": "Wire all consumers to getStrings(lang): workspace/agentic/home/editor/toolbar, pristine sample-doc swap, locale-aware date/number", "owner": "เบล", "deps": [9, 10], "status": "done" },
+    { "id": 12, "title": "Unit tests (th, assembler-th, language-store) + build + browser QA vs spec §5 + security audit", "owner": "แพร+โบว์", "deps": [11], "status": "done" }
   ],
   "findings": []
 }

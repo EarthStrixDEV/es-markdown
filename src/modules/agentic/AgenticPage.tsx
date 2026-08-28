@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { CopyButton } from '@/components/CopyButton';
 import { MarkdownPreview } from '@/components/MarkdownPreview';
 import { getStrings } from '@/data/i18n';
+import { useLanguage } from '@/i18n/useLanguage';
 import { AGENT_FIELD_KEYS } from '@/data/i18n/types';
 import { assembleAgent } from '@/lib/assembler';
 import { slugify } from '@/lib/slugify';
@@ -59,7 +60,8 @@ function splitFrontmatter(md: string): { frontmatter: string | null; body: strin
 }
 
 export function AgenticPage() {
-  const strings = getStrings('en');
+  const { lang } = useLanguage();
+  const strings = getStrings(lang);
   const a = strings.agent;
   const { state, newAgent, selectAgent, setField, resetAgent, save } = useAgentsState();
   const [view, setView] = useState<'formatted' | 'plain'>('formatted');
@@ -170,7 +172,8 @@ export function AgenticPage() {
             <footer className="ag-preview-foot">
               <div className="ag-meter">
                 <span className="ag-chip">
-                  {markdown.length.toLocaleString('en-US')} {strings.ui.chars}
+                  {markdown.length.toLocaleString(strings.locale === 'th' ? 'th-TH' : 'en-US')}{' '}
+                  {strings.ui.chars}
                 </span>
                 <span className="ag-chip ag-chip-pink">
                   {writtenCount}/{AGENT_FIELD_KEYS.length} {strings.ui.written}

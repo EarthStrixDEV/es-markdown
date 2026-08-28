@@ -4,7 +4,7 @@
  * behind this interface so a Thai locale can be added without refactoring.
  */
 
-export type Locale = 'en';
+export type Locale = 'en' | 'th';
 
 export type FormatId = 'prompt' | 'skill' | 'workflow';
 
@@ -140,8 +140,130 @@ export interface AgentStrings {
   };
 }
 
+/*
+ * App chrome — top bar in AppShell.tsx. `lang` covers the upcoming TH/EN
+ * segmented toggle (aria-label for the group + the two segment labels).
+ */
+export interface ShellStrings {
+  brand: string;
+  nav: Record<'home' | 'markdown' | 'editor' | 'agentic', string>;
+  /** aria-label of the top-bar <nav>. */
+  navAriaLabel: string;
+  /** Theme button aria-label depends on the current theme. */
+  themeToggle: { toLight: string; toDark: string };
+  settingsLabel: string;
+  lang: { label: string; en: string; th: string };
+}
+
+/* Home / marketing page — shapes mirror the const arrays in HomePage.tsx. */
+export interface HomeTestimonialStrings {
+  category: string;
+  quote: string;
+  initials: string;
+  name: string;
+  role: string;
+}
+
+export interface HomeStrings {
+  hero: {
+    eyebrow: string;
+    /** H1 — `\n` marks the <br /> line breaks. */
+    title: string;
+    sub: string;
+    ctaPlaceholder: string;
+    ctaAriaLabel: string;
+    ctaButton: string;
+    /** Shortcut key shown in <kbd>, then the text after it. */
+    kbd: string;
+    kbdHint: string;
+    exampleFormats: string;
+  };
+  stats: { value: string; caption: string }[];
+  logosAriaLabel: string;
+  logosCaption: string;
+  why: { eyebrow: string; heading: string; lede: string };
+  featureCards: { title: string; copy: string }[];
+  facts: {
+    eyebrow: string;
+    /** `\n` marks the <br />; the <span> emphasis words stay in the component. */
+    headline: string;
+    items: { key: string; strong: string; rest: string }[];
+  };
+  testimonials: { eyebrow: string; heading: string; items: HomeTestimonialStrings[] };
+  footer: {
+    tagline: string;
+    ariaLabel: string;
+    links: Record<'markdown' | 'agentic' | 'github' | 'privacy', string>;
+  };
+}
+
+/*
+ * Editor module — EditorPage.tsx + Toolbar.tsx. `toolbar` keys mirror the
+ * action ids passed to onInline/onBlock/onList/onSnippet plus undo/redo.
+ */
+export interface EditorStrings {
+  title: string;
+  subtitle: string;
+  clear: string;
+  saveToHistory: string;
+  /** Save button label during the 1.6s acknowledge flash. */
+  savedFlash: string;
+  /** title= tooltip on the save button. */
+  saveTitle: string;
+  pane: {
+    plainText: string;
+    draftFileName: string;
+    livePreview: string;
+    rendered: string;
+    rawSource: string;
+  };
+  /** Preview pane footer pill. */
+  pill: string;
+  /** Units in the "{n} chars · {n} lines" pill. */
+  chars: string;
+  lines: string;
+  copyRaw: string;
+  copyHtml: string;
+  ariaLabels: {
+    markdownSource: string;
+    preview: string;
+    previewMode: string;
+    toolbar: string;
+    blockStyle: string;
+  };
+  blockOptions: Record<'p' | 'h1' | 'h2' | 'h3', string>;
+  toolbar: {
+    bold: string;
+    italic: string;
+    strikethrough: string;
+    inlineCode: string;
+    heading2: string;
+    bullet: string;
+    ordered: string;
+    task: string;
+    link: string;
+    image: string;
+    table: string;
+    /** Visible text next to the icon on the wide Table button. */
+    tableWideLabel: string;
+    quote: string;
+    codeblock: string;
+    divider: string;
+    undo: string;
+    redo: string;
+  };
+  /** Initial editor content — the seed document for EditorPage. */
+  sampleDoc: string;
+}
+
 export interface Strings {
   locale: Locale;
+
+  shell: ShellStrings;
+
+  home: HomeStrings;
+
+  editor: EditorStrings;
 
   ui: {
     chooseTopic: string;
@@ -160,6 +282,9 @@ export interface Strings {
     followUpNote: string;
     agentLinkLabel: string;
     agentLinkTagline: string;
+    timeJustNow: string;
+    timeMinutesAgo: string;
+    timeHoursAgo: string;
   };
 
   formats: Record<FormatId, { label: string }>;

@@ -70,9 +70,9 @@
   --r-pill: 999px;
 
   /* Font families (variables provided by next/font in layout.tsx) */
-  --font-display: var(--font-fraunces), Georgia, serif;
-  --font-body: var(--font-sora), system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), monospace;
+  --font-display: var(--font-fraunces), var(--font-noto-thai), Georgia, serif;
+  --font-body: var(--font-sora), var(--font-noto-thai), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), var(--font-noto-thai), monospace;
 }
 
 [data-theme='light'] {

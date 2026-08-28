@@ -1,0 +1,15 @@
+{
+  "project": "ES Markdown — initial scaffold + 4 modules",
+  "plan": "C:/Users/Waraponj/.claude/plans/initial-project-es-moonlit-lighthouse.md",
+  "team": { "อออม": "Frontend UI Engineer", "เบล": "Frontend Integration Engineer", "แพร": "QA Lead" },
+  "tasks": [
+    { "id": 1, "title": "Scaffold Next.js + tokens.css + ThemeScript + AppShell + 4 route stubs", "owner": "ออม", "deps": [], "status": "done" },
+    { "id": 2, "title": "Markdown Editor module (marked, toolbar actions, grouped undo/redo, sample doc)", "owner": "เบล", "deps": [1], "status": "done" },
+    { "id": 3, "title": "Home module (static: hero, FakeWindow, logo strip, cards, testimonials)", "owner": "ออม", "deps": [1], "status": "done" },
+    { "id": 4, "title": "Markdown workspace (en.ts DEF content, assembler + tests, form/preview/meter/history)", "owner": "เบล", "deps": [2], "status": "done" },
+    { "id": 5, "title": "Agentic module (11 fields, AGENT.md preview, sidebar, static workflow graph)", "owner": "เบล", "deps": [4], "status": "done" },
+    { "id": 6, "title": "Responsive breakpoints + light-mode shadow tuning pass (all pages)", "owner": "ออม", "deps": [2, 3, 4, 5], "status": "done" },
+    { "id": 7, "title": "QA vs acceptance criteria (spec §2–§5) + build + unit tests", "owner": "แพร", "deps": [6], "status": "done" }
+  ],
+  "findings": []
+}

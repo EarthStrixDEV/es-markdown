@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ES Markdown — Workspace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; background: #0B1626; font-family: 'Sora', system-ui, sans-serif; }
+    h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; margin: 0; }
+    p { margin: 0; }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-thumb { background: #22335A; border-radius: 8px; }
+  </style>
+</head>
+<body>
+<div style="position: relative; width: 1440px; height: 900px; background: #0B1626; color: #F6EFE4; display: grid; grid-template-columns: 240px 1fr; grid-template-rows: 64px 1fr; overflow: hidden;">
+
+  <!-- TOPBAR -->
+  <div style="grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; background: #101E36; border-bottom: 1px solid rgba(246,239,228,0.10);">
+    <div style="display: flex; align-items: center; gap: 10px; font-family: 'Fraunces', serif; font-weight: 600; font-size: 17px;">
+      <div style="width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(145deg, #F2A6C6, #C64C80); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #2A0A17; font-size: 13px; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06);">M</div>
+      ES Markdown
+    </div>
+    <div style="display: flex; gap: 6px; background: #16233D; padding: 4px; border-radius: 14px; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">
+      <div style="padding: 8px 18px; border-radius: 10px; color: #8C97B3; font-weight: 600; font-size: 14px;">Home</div>
+      <div style="padding: 8px 18px; border-radius: 10px; background: #F2A6C6; color: #3A0E22; font-weight: 600; font-size: 14px; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06);">Markdown</div>
+      <div style="padding: 8px 18px; border-radius: 10px; color: #8C97B3; font-weight: 600; font-size: 14px;">Editor</div>
+      <div style="padding: 8px 18px; border-radius: 10px; color: #8C97B3; font-weight: 600; font-size: 14px;">Agentic</div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <div style="width: 36px; height: 36px; border-radius: 11px; background: #16233D; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06); color: #C9D2E4; display: flex; align-items: center; justify-content: center; font-size: 15px;">◐</div>
+      <div style="width: 36px; height: 36px; border-radius: 11px; background: #16233D; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06); color: #C9D2E4; display: flex; align-items: center; justify-content: center; font-size: 15px;">⚙</div>
+      <div style="width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(145deg, #9FB4E8, #324873);"></div>
+    </div>
+  </div>
+
+  <!-- SIDE -->
+  <div style="background: #101E36; border-right: 1px solid rgba(246,239,228,0.10); padding: 22px 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 26px;">
+    <div>
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8C97B3; padding: 0 8px; margin-bottom: 10px;">Choose a topic</div>
+      <div style="display: flex; flex-direction: column; gap: 5px;">
+        <div style="display: flex; align-items: center; gap: 11px; padding: 10px 12px; border-radius: 13px; background: rgba(242,166,198,0.14); color: #E0699A; font-size: 14px; font-weight: 700; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06);">
+          <span style="width: 28px; height: 28px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 15px; background: #F2A6C6; color: #3A0E22; flex: none;">🌐</span>Create a website
+        </div>
+        <div style="display: flex; align-items: center; gap: 11px; padding: 10px 12px; border-radius: 13px; color: #C9D2E4; font-size: 14px; font-weight: 500;">
+          <span style="width: 28px; height: 28px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 15px; background: #16233D; flex: none;">📊</span>Summarize raw data
+        </div>
+        <div style="display: flex; align-items: center; gap: 11px; padding: 10px 12px; border-radius: 13px; color: #C9D2E4; font-size: 14px; font-weight: 500;">
+          <span style="width: 28px; height: 28px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 15px; background: #16233D; flex: none;">🤖</span>Create new agent
+        </div>
+        <div style="display: flex; align-items: center; gap: 11px; padding: 10px 12px; border-radius: 13px; color: #C9D2E4; font-size: 14px; font-weight: 500;">
+          <span style="width: 28px; height: 28px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 15px; background: #16233D; flex: none;">📋</span>Project proposal
+        </div>
+        <div style="display: flex; align-items: center; gap: 11px; padding: 10px 12px; border-radius: 13px; color: #C9D2E4; font-size: 14px; font-weight: 500;">
+          <span style="width: 28px; height: 28px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 15px; background: #16233D; flex: none;">✨</span>Other
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8C97B3; padding: 0 8px; margin-bottom: 10px;">History</div>
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <div style="padding: 9px 12px; border-radius: 11px; font-size: 13px; display: flex; flex-direction: column; gap: 2px;"><span style="color: #F6EFE4; font-weight: 500;">Coffee roastery landing page</span><span style="color: #8C97B3; font-size: 11px;">Website · 2h ago</span></div>
+        <div style="padding: 9px 12px; border-radius: 11px; font-size: 13px; display: flex; flex-direction: column; gap: 2px;"><span style="color: #F6EFE4; font-weight: 500;">Q3 churn data → chart brief</span><span style="color: #8C97B3; font-size: 11px;">Data summary · Yesterday</span></div>
+        <div style="padding: 9px 12px; border-radius: 11px; font-size: 13px; display: flex; flex-direction: column; gap: 2px;"><span style="color: #F6EFE4; font-weight: 500;">Support Triage Agent</span><span style="color: #8C97B3; font-size: 11px;">Agent · Yesterday</span></div>
+        <div style="padding: 9px 12px; border-radius: 11px; font-size: 13px; display: flex; flex-direction: column; gap: 2px;"><span style="color: #F6EFE4; font-weight: 500;">DMSKU proposal draft</span><span style="color: #8C97B3; font-size: 11px;">Proposal · Mon</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div style="overflow-y: auto; padding: 26px 28px 40px;">
+    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 22px;">
+      <div>
+        <h1 style="font-size: 24px; font-weight: 600;">Create a website</h1>
+        <p style="color: #8C97B3; font-size: 14px; margin-top: 6px;">Answer what you know — ES Markdown fills the rest with defaults built to keep the brief specific.</p>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <div style="border-radius: 12px; padding: 10px 18px; font-weight: 700; font-size: 13px; background: #16233D; color: #C9D2E4; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06); white-space: nowrap;">↺ Reset</div>
+        <div style="border-radius: 12px; padding: 10px 18px; font-weight: 700; font-size: 13px; background: #F2A6C6; color: #3A0E22; box-shadow: 0 8px 18px -8px rgba(242,166,198,0.7); white-space: nowrap;">✓ Save to history</div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 420px; gap: 22px; align-items: start;">
+
+      <!-- FORM -->
+      <div style="background: #16233D; border-radius: 26px; padding: 28px 26px; box-shadow: 7px 7px 16px rgba(0,0,0,0.35), -5px -5px 13px rgba(255,255,255,0.06);">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px solid rgba(246,239,228,0.10);">
+          <div style="width: 38px; height: 38px; border-radius: 12px; background: #F2A6C6; color: #3A0E22; display: flex; align-items: center; justify-content: center; font-size: 17px;">🌐</div>
+          <div><div style="font-weight: 700; font-size: 15px;">Website brief</div><div style="font-size: 12px; color: #8C97B3;">9 fields · maps to Goal, Context, Requirements &amp; Constraints</div></div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px;">
+          <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">What is this website for? <span style="color: #E0699A; font-weight: 700;">*</span></label>
+            <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #F6EFE4; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">A landing page for a small-batch coffee roastery, launching online orders for the first time.</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Who's it for</label>
+            <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #5C6684; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">e.g. local coffee drinkers, gift buyers</div>
+            <span style="font-size: 12px; color: #8C97B3; font-style: italic;">If empty: <span style="font-style: normal; color: #E8D48A; font-weight: 600;">general visitors, no assumed familiarity with the brand</span></span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Tone / voice</label>
+            <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #F6EFE4; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">Warm, a little playful, not corporate</div>
+          </div>
+          <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Pages needed</label>
+            <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #F6EFE4; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">Home, Shop, Our story, Find us</div>
+          </div>
+          <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Must-have sections on the home page</label>
+            <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #F6EFE4; line-height: 1.5; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06); min-height: 60px;">Hero with roastery photo, 3 featured beans, "how we roast" story teaser, newsletter signup</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">One thing to avoid</label>
+            <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #5C6684; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">e.g. generic stock photography</div>
+            <span style="font-size: 12px; color: #8C97B3; font-style: italic;">If empty: <span style="font-style: normal; color: #E8D48A; font-weight: 600;">looking like a generic template</span></span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Reference site (optional)</label>
+            <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #5C6684; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">a URL or brand you like</div>
+            <span style="font-size: 12px; color: #8C97B3; font-style: italic;">If empty: <span style="font-style: normal; color: #E8D48A; font-weight: 600;">no reference — infer from tone</span></span>
+          </div>
+        </div>
+
+        <div style="margin-top: 22px; padding: 14px 16px; border-radius: 14px; background: rgba(242,166,198,0.08); border: 1px dashed rgba(242,166,198,0.4); font-size: 13px; color: #C9D2E4; display: flex; gap: 10px; align-items: flex-start;">
+          💬 <span><strong>Follow-up pack ready:</strong> 3 pre-written next messages for when the first draft is close but not quite there — shown after you copy, not sent automatically.</span>
+        </div>
+      </div>
+
+      <!-- PREVIEW -->
+      <div style="background: #101E36; border-radius: 26px; overflow: hidden; box-shadow: 7px 7px 16px rgba(0,0,0,0.35), -5px -5px 13px rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06);">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; border-bottom: 1px solid rgba(255,255,255,0.07);">
+          <div style="display: flex; gap: 4px; background: rgba(255,255,255,0.05); padding: 3px; border-radius: 9px;">
+            <div style="font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 7px; background: #F2A6C6; color: #3A0E22;">Formatted</div>
+            <div style="font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 7px; color: #8C97B3;">Plain text</div>
+          </div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8C97B3;">coffee-roastery-brief.md</div>
+        </div>
+        <div style="height: 480px; overflow-y: auto; padding: 22px 22px 26px; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.8; color: #D8DEEC;">
+          <div style="font-family: 'JetBrains Mono', monospace; color: #F2A6C6; font-size: 16px; font-weight: 600; margin-bottom: 4px;"># Coffee Roastery Landing Page</div>
+          <div style="font-family: 'JetBrains Mono', monospace; color: #9FB4E8; font-size: 13px; font-weight: 600; margin: 18px 0 6px;">## Goal</div>
+          <p style="color: #C9D2E4;">A landing page for a small-batch coffee roastery, launching online orders for the first time.</p>
+          <div style="font-family: 'JetBrains Mono', monospace; color: #9FB4E8; font-size: 13px; font-weight: 600; margin: 18px 0 6px;">## Context</div>
+          <p style="color: #5C6684; font-style: italic;">general visitors, no assumed familiarity with the brand</p>
+          <p style="color: #C9D2E4;">Tone: warm, a little playful, not corporate.</p>
+          <div style="font-family: 'JetBrains Mono', monospace; color: #9FB4E8; font-size: 13px; font-weight: 600; margin: 18px 0 6px;">## Pages</div>
+          <ul style="margin: 0; padding-left: 20px; color: #C9D2E4;"><li>Home</li><li>Shop</li><li>Our story</li><li>Find us</li></ul>
+          <div style="font-family: 'JetBrains Mono', monospace; color: #9FB4E8; font-size: 13px; font-weight: 600; margin: 18px 0 6px;">## Requirements</div>
+          <ul style="margin: 0; padding-left: 20px; color: #C9D2E4;">
+            <li>Hero with roastery photo</li>
+            <li>3 featured beans</li>
+            <li>"How we roast" story teaser</li>
+            <li>Newsletter signup</li>
+          </ul>
+          <div style="font-family: 'JetBrains Mono', monospace; color: #9FB4E8; font-size: 13px; font-weight: 600; margin: 18px 0 6px;">## Constraints</div>
+          <p style="color: #5C6684; font-style: italic;">avoid looking like a generic template</p>
+          <div style="font-family: 'JetBrains Mono', monospace; color: #9FB4E8; font-size: 13px; font-weight: 600; margin: 18px 0 6px;">## If information is missing</div>
+          <p style="color: #C9D2E4;">Ask up to 3 questions before proceeding. Never fabricate what isn't specified.</p>
+        </div>
+        <div style="padding: 13px 18px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; gap: 8px;">
+            <span style="font-size: 11px; font-weight: 600; color: #8C97B3; background: rgba(255,255,255,0.05); padding: 4px 9px; border-radius: 999px; font-family: 'JetBrains Mono', monospace;">1,180 chars</span>
+            <span style="font-size: 11px; font-weight: 600; color: #F2A6C6; background: rgba(242,166,198,0.12); padding: 4px 9px; border-radius: 999px; font-family: 'JetBrains Mono', monospace;">5/9 written</span>
+          </div>
+          <div style="background: #F2A6C6; color: #3A0E22; font-weight: 700; font-size: 12px; padding: 8px 16px; border-radius: 10px;">⧉ Copy</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OTHER TOPIC STATES -->
+    <div style="margin-top: 26px;">
+      <div style="font-size: 12px; font-weight: 700; color: #8C97B3; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em;">Other topics — same idea, different shape</div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
+        <div style="background: #16233D; border-radius: 18px; padding: 18px 16px; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06);">
+          <div style="width: 32px; height: 32px; border-radius: 10px; background: #22335A; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-bottom: 12px;">📊</div>
+          <div style="font-weight: 700; font-size: 14px; margin-bottom: 4px;">Summarize raw data</div>
+          <div style="font-size: 12px; color: #8C97B3; line-height: 1.5;">Paste numbers, name what's unclear — output stays honest about gaps.</div>
+          <div style="margin-top: 12px; height: 5px; border-radius: 99px; background: #101E36; overflow: hidden;"><span style="display: block; height: 100%; width: 20%; background: #F2A6C6; border-radius: 99px;"></span></div>
+        </div>
+        <div style="background: #16233D; border-radius: 18px; padding: 18px 16px; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06);">
+          <div style="width: 32px; height: 32px; border-radius: 10px; background: #22335A; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-bottom: 12px;">🤖</div>
+          <div style="font-weight: 700; font-size: 14px; margin-bottom: 4px;">Create new agent</div>
+          <div style="font-size: 12px; color: #8C97B3; line-height: 1.5;">11 fields incl. Tools, Guardrails &amp; escalation, Voice — outputs AGENT.md.</div>
+          <div style="margin-top: 12px; height: 5px; border-radius: 99px; background: #101E36; overflow: hidden;"><span style="display: block; height: 100%; width: 64%; background: #F2A6C6; border-radius: 99px;"></span></div>
+        </div>
+        <div style="background: #16233D; border-radius: 18px; padding: 18px 16px; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06);">
+          <div style="width: 32px; height: 32px; border-radius: 10px; background: #22335A; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-bottom: 12px;">📋</div>
+          <div style="font-weight: 700; font-size: 14px; margin-bottom: 4px;">Project proposal</div>
+          <div style="font-size: 12px; color: #8C97B3; line-height: 1.5;">Requirement spec structure — objective, scope, out-of-scope, success criteria.</div>
+          <div style="margin-top: 12px; height: 5px; border-radius: 99px; background: #101E36; overflow: hidden;"><span style="display: block; height: 100%; width: 8%; background: #F2A6C6; border-radius: 99px;"></span></div>
+        </div>
+        <div style="background: #16233D; border-radius: 18px; padding: 18px 16px; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06);">
+          <div style="width: 32px; height: 32px; border-radius: 10px; background: #22335A; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-bottom: 12px;">✨</div>
+          <div style="font-weight: 700; font-size: 14px; margin-bottom: 4px;">Other</div>
+          <div style="font-size: 12px; color: #8C97B3; line-height: 1.5;">Freeform sections — no defaults injected, exactly what you type.</div>
+          <div style="margin-top: 12px; height: 5px; border-radius: 99px; background: #101E36; overflow: hidden;"><span style="display: block; height: 100%; width: 0%; background: #F2A6C6; border-radius: 99px;"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI FAB -->
+  <div style="position: absolute; bottom: 26px; right: 26px; display: flex; align-items: center; gap: 10px; background: #F2A6C6; color: #3A0E22; border-radius: 999px; padding: 14px 20px 14px 16px; font-weight: 700; font-size: 14px; box-shadow: 0 14px 32px -10px rgba(242,166,198,0.7);">
+    <span style="width: 8px; height: 8px; border-radius: 50%; background: #3A0E22;"></span>Ask for a pattern
+  </div>
+</div>
+</body>
+</html>

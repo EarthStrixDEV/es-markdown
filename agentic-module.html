@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ES Markdown — Agentic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; background: #0B1626; font-family: 'Sora', system-ui, sans-serif; }
+    h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; margin: 0; }
+    p { margin: 0; }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-thumb { background: #22335A; border-radius: 8px; }
+  </style>
+</head>
+<body>
+<div style="width: 1440px; background: #0B1626; color: #F6EFE4;">
+
+  <!-- TOPBAR -->
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 0 22px; height: 64px; background: #101E36; border-bottom: 1px solid rgba(246,239,228,0.10);">
+    <div style="display: flex; align-items: center; gap: 10px; font-family: 'Fraunces', serif; font-weight: 600; font-size: 17px;">
+      <div style="width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(145deg, #F2A6C6, #C64C80); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #2A0A17; font-size: 13px; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06);">M</div>
+      ES Markdown
+    </div>
+    <div style="display: flex; gap: 6px; background: #16233D; padding: 4px; border-radius: 14px; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">
+      <div style="padding: 8px 18px; border-radius: 10px; color: #8C97B3; font-weight: 600; font-size: 14px;">Home</div>
+      <div style="padding: 8px 18px; border-radius: 10px; color: #8C97B3; font-weight: 600; font-size: 14px;">Markdown</div>
+      <div style="padding: 8px 18px; border-radius: 10px; color: #8C97B3; font-weight: 600; font-size: 14px;">Editor</div>
+      <div style="padding: 8px 18px; border-radius: 10px; background: #F2A6C6; color: #3A0E22; font-weight: 600; font-size: 14px; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06);">Agentic</div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <div style="width: 36px; height: 36px; border-radius: 11px; background: #16233D; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06); color: #C9D2E4; display: flex; align-items: center; justify-content: center; font-size: 15px;">◐</div>
+      <div style="width: 36px; height: 36px; border-radius: 11px; background: #16233D; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06); color: #C9D2E4; display: flex; align-items: center; justify-content: center; font-size: 15px;">⚙</div>
+      <div style="width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(145deg, #9FB4E8, #324873);"></div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 240px 1fr;">
+
+    <!-- SIDE -->
+    <div style="background: #101E36; border-right: 1px solid rgba(246,239,228,0.10); padding: 22px 16px; display: flex; flex-direction: column; gap: 22px;">
+      <div style="border-radius: 13px; background: #F2A6C6; color: #3A0E22; font-weight: 700; font-size: 14px; padding: 11px; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06); text-align: center;">+ New agent</div>
+      <div>
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8C97B3; padding: 0 8px; margin-bottom: 10px;">Your agents</div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <div style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 12px; background: rgba(242,166,198,0.14); box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06);">
+            <div style="width: 30px; height: 30px; border-radius: 9px; flex: none; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 600; font-size: 13px; color: #2A0A17; background: linear-gradient(145deg, #F2A6C6, #E0699A);">ST</div>
+            <div><div style="font-size: 13px; font-weight: 600; color: #F6EFE4;">Support Triage</div><div style="font-size: 11px; color: #8C97B3;">Triage · escalation</div></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 12px;">
+            <div style="width: 30px; height: 30px; border-radius: 9px; flex: none; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 600; font-size: 13px; color: #2A0A17; background: linear-gradient(145deg, #9FB4E8, #324873);">CR</div>
+            <div><div style="font-size: 13px; font-weight: 600; color: #F6EFE4;">Code Reviewer</div><div style="font-size: 11px; color: #8C97B3;">Review · comments only</div></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 12px;">
+            <div style="width: 30px; height: 30px; border-radius: 9px; flex: none; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 600; font-size: 13px; color: #2A0A17; background: linear-gradient(145deg, #E8D48A, #B99A3E);">RD</div>
+            <div><div style="font-size: 13px; font-weight: 600; color: #F6EFE4;">Research Digest</div><div style="font-size: 11px; color: #8C97B3;">Summarize · cite sources</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <div style="padding: 26px 28px 40px;">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 22px;">
+        <div>
+          <h1 style="font-size: 24px; font-weight: 600;">Support Triage Agent</h1>
+          <p style="color: #8C97B3; font-size: 14px; margin-top: 6px;">Fill what you know about how this agent should behave — unfilled fields default to the safest option, not a blank.</p>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <div style="border-radius: 12px; padding: 10px 18px; font-weight: 700; font-size: 13px; background: #16233D; color: #C9D2E4; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06); white-space: nowrap;">↺ Reset</div>
+          <div style="border-radius: 12px; padding: 10px 18px; font-weight: 700; font-size: 13px; background: #F2A6C6; color: #3A0E22; box-shadow: 0 8px 18px -8px rgba(242,166,198,0.7); white-space: nowrap;">✓ Save agent</div>
+        </div>
+      </div>
+
+      <!-- FORM VIEW LABEL -->
+      <div style="display: flex; gap: 10px; margin-bottom: 18px;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #F2A6C6;">📝 Form design</div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 420px; gap: 22px; align-items: start;">
+
+        <!-- FORM -->
+        <div style="background: #16233D; border-radius: 26px; padding: 28px 26px; box-shadow: 7px 7px 16px rgba(0,0,0,0.35), -5px -5px 13px rgba(255,255,255,0.06);">
+
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #E0699A;">Identity</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; margin-top: 14px;">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Name <span style="color: #E0699A; font-weight: 700;">*</span></label>
+              <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #F6EFE4; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">Support Triage Agent</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Description</label>
+              <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #F6EFE4; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">First-line triage for inbound support tickets</div>
+            </div>
+            <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px;">
+              <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Role</label>
+              <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #F6EFE4; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">Reads new tickets, tags severity, and drafts a first reply — never sends without a human.</div>
+            </div>
+            <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px;">
+              <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Personality &amp; voice</label>
+              <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #5C6684; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">e.g. calm, precise, no corporate filler</div>
+              <span style="font-size: 12px; color: #8C97B3; font-style: italic;">If empty: <span style="font-style: normal; color: #E8D48A; font-weight: 600;">neutral and concise, no exclamation points</span></span>
+            </div>
+          </div>
+
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #E0699A; margin-top: 26px; padding-top: 18px; border-top: 1px solid rgba(246,239,228,0.10);">Behavior</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; margin-top: 14px;">
+            <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px;">
+              <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Instruction <span style="color: #E0699A; font-weight: 700;">*</span></label>
+              <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #F6EFE4; line-height: 1.6; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06); min-height: 76px;">1. Read the ticket and prior thread<br>2. Tag severity: P1 / P2 / P3<br>3. Draft a first reply, don't send</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Used when / triggered by</label>
+              <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #F6EFE4; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">New ticket lands in #support-inbox</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Input it receives at start</label>
+              <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #F6EFE4; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">Ticket text + customer's prior thread</div>
+            </div>
+            <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px;">
+              <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Tools it can use <span style="color: #E0699A; font-weight: 700;">*</span></label>
+              <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #5C6684; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">e.g. Zendesk read, internal wiki search</div>
+              <span style="font-size: 12px; color: #8C97B3; font-style: italic;">If empty: <span style="font-style: normal; color: #E68B8B; font-weight: 600;">read &amp; search only — no send, no delete, no irreversible action</span></span>
+            </div>
+          </div>
+
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #E0699A; margin-top: 26px; padding-top: 18px; border-top: 1px solid rgba(246,239,228,0.10);">Guardrails</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; margin-top: 14px;">
+            <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px;">
+              <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Rule — hard limits &amp; escalation <span style="color: #E0699A; font-weight: 700;">*</span></label>
+              <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #F6EFE4; line-height: 1.6; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06); min-height: 56px;">Never close a ticket without human sign-off. Escalate anything mentioning legal or a refund over ฿5,000.</div>
+            </div>
+            <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px;">
+              <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Output &amp; handoff — how results reach a person</label>
+              <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #5C6684; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">e.g. drafted reply posted as internal note</div>
+              <span style="font-size: 12px; color: #8C97B3; font-style: italic;">If empty: <span style="font-style: normal; color: #E8D48A; font-weight: 600;">posted as a draft reply, flagged for human review</span></span>
+            </div>
+            <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px;">
+              <label style="font-size: 13px; font-weight: 600; color: #C9D2E4;">Considered successful when</label>
+              <div style="background: #101E36; border-radius: 13px; padding: 12px 14px; font-size: 14px; color: #5C6684; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06);">e.g. every ticket tagged within 2 minutes</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 22px; padding: 14px 16px; border-radius: 14px; background: rgba(143,203,168,0.08); border: 1px solid rgba(143,203,168,0.3); font-size: 13px; color: #C9D2E4; display: flex; gap: 10px; align-items: flex-start;">
+            🛡️ <span><strong>Default posture is intentionally strict.</strong> Leaving Tools or Rule blank gives this agent read-only access and no ability to act without sign-off — safer than guessing wrong on an agent that can take irreversible actions.</span>
+          </div>
+        </div>
+
+        <!-- PREVIEW -->
+        <div style="background: #101E36; border-radius: 26px; overflow: hidden; box-shadow: 7px 7px 16px rgba(0,0,0,0.35), -5px -5px 13px rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06);">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; border-bottom: 1px solid rgba(255,255,255,0.07);">
+            <div style="display: flex; gap: 4px; background: rgba(255,255,255,0.05); padding: 3px; border-radius: 9px;">
+              <div style="font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 7px; background: #F2A6C6; color: #3A0E22;">AGENT.md</div>
+              <div style="font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 7px; color: #8C97B3;">Prompt</div>
+            </div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8C97B3;">support-triage-agent.md</div>
+          </div>
+          <div style="height: 640px; overflow-y: auto; padding: 22px 22px 26px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.8; color: #D8DEEC;">
+            <div style="color: #5C6684;">---<br><span style="color: #9FB4E8;">name:</span> <span style="color: #E8D48A;">support-triage-agent</span><br><span style="color: #9FB4E8;">description:</span> <span style="color: #E8D48A;">First-line triage for inbound support tickets</span><br><span style="color: #9FB4E8;">tools:</span> <span style="color: #E8D48A;">read-only</span><br>---</div>
+            <div style="color: #9FB4E8; font-weight: 600; margin: 16px 0 6px;">## Role</div>
+            <p style="color: #C9D2E4;">Reads new tickets, tags severity, and drafts a first reply — never sends without a human.</p>
+            <div style="color: #9FB4E8; font-weight: 600; margin: 16px 0 6px;">## Instruction</div>
+            <ul style="margin: 0; padding-left: 20px; color: #C9D2E4;"><li>Read the ticket and prior thread</li><li>Tag severity: P1 / P2 / P3</li><li>Draft a first reply, don't send</li></ul>
+            <div style="color: #9FB4E8; font-weight: 600; margin: 16px 0 6px;">## Tools</div>
+            <p style="color: #5C6684; font-style: italic;">read &amp; search only — no send, no delete, no irreversible action</p>
+            <div style="color: #9FB4E8; font-weight: 600; margin: 16px 0 6px;">## Rule</div>
+            <p style="color: #C9D2E4;">Never close a ticket without human sign-off. Escalate anything mentioning legal or a refund over ฿5,000.</p>
+            <div style="color: #9FB4E8; font-weight: 600; margin: 16px 0 6px;">## Output &amp; handoff</div>
+            <p style="color: #5C6684; font-style: italic;">posted as a draft reply, flagged for human review</p>
+            <div style="color: #9FB4E8; font-weight: 600; margin: 16px 0 6px;">## If information is missing</div>
+            <p style="color: #C9D2E4;">Ask up to 3 questions before proceeding. Never guess and act.</p>
+          </div>
+          <div style="padding: 13px 18px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; gap: 8px;">
+              <span style="font-size: 11px; font-weight: 600; color: #8C97B3; background: rgba(255,255,255,0.05); padding: 4px 9px; border-radius: 999px; font-family: 'JetBrains Mono', monospace;">1,340 chars</span>
+              <span style="font-size: 11px; font-weight: 600; color: #F2A6C6; background: rgba(242,166,198,0.12); padding: 4px 9px; border-radius: 999px; font-family: 'JetBrains Mono', monospace;">7/11 written</span>
+            </div>
+            <div style="background: #F2A6C6; color: #3A0E22; font-weight: 700; font-size: 12px; padding: 8px 16px; border-radius: 10px;">⧉ Copy</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WORKFLOW GRAPH (OPTIONAL) -->
+      <div style="margin-top: 30px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+          <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8C97B3;">◇ Workflow graph</div>
+          <span style="font-size: 10px; font-weight: 700; background: rgba(255,255,255,0.08); color: #8C97B3; padding: 3px 9px; border-radius: 999px;">OPTIONAL VIEW</span>
+        </div>
+        <div style="background: #101E36; border-radius: 26px; overflow: hidden; box-shadow: 7px 7px 16px rgba(0,0,0,0.35), -5px -5px 13px rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06);">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.07);">
+            <div style="display: flex; gap: 8px;">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #C9D2E4; background: rgba(255,255,255,0.06); padding: 5px 10px; border-radius: 8px; border: 1px dashed rgba(255,255,255,0.14);">+ Role</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #C9D2E4; background: rgba(255,255,255,0.06); padding: 5px 10px; border-radius: 8px; border: 1px dashed rgba(255,255,255,0.14);">+ Step</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #C9D2E4; background: rgba(255,255,255,0.06); padding: 5px 10px; border-radius: 8px; border: 1px dashed rgba(255,255,255,0.14);">+ Decision</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #C9D2E4; background: rgba(255,255,255,0.06); padding: 5px 10px; border-radius: 8px; border: 1px dashed rgba(255,255,255,0.14);">+ Tool</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #C9D2E4; background: rgba(255,255,255,0.06); padding: 5px 10px; border-radius: 8px; border: 1px dashed rgba(255,255,255,0.14);">+ Output</span>
+            </div>
+            <span style="font-size: 11px; font-weight: 700; color: #8C97B3; background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 999px;">Drag to wire · optional view</span>
+          </div>
+          <div style="position: relative; height: 340px; background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 22px 22px; background-color: #0B1626;">
+            <svg style="position: absolute; inset: 0; width: 100%; height: 100%;">
+              <defs>
+                <marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#F2A6C6" opacity="0.7"></path>
+                </marker>
+              </defs>
+              <path d="M 190 60 C 260 60, 260 60, 330 60" stroke="#F2A6C6" stroke-width="2" fill="none" opacity="0.7" marker-end="url(#arrow2)"></path>
+              <path d="M 480 80 C 480 130, 480 130, 480 160" stroke="#F2A6C6" stroke-width="2" fill="none" opacity="0.7" marker-end="url(#arrow2)"></path>
+              <path d="M 410 230 C 340 230, 340 230, 270 230" stroke="#F2A6C6" stroke-width="2" fill="none" opacity="0.7" marker-end="url(#arrow2)"></path>
+              <path d="M 190 250 C 190 290, 190 290, 190 300" stroke="#F2A6C6" stroke-width="2" fill="none" opacity="0.7" marker-end="url(#arrow2)"></path>
+            </svg>
+            <div style="position: absolute; top: 30px; left: 40px; width: 150px; border-radius: 16px; padding: 12px 14px; background: #16233D; box-shadow: 0 10px 24px -10px rgba(0,0,0,0.5), 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);">
+              <div style="font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #F2A6C6; margin-bottom: 5px;">Role</div>
+              <div style="font-size: 12px; color: #D8DEEC; line-height: 1.4;">Support triage, first-line only</div>
+            </div>
+            <div style="position: absolute; top: 30px; left: 330px; width: 150px; border-radius: 16px; padding: 12px 14px; background: #16233D; box-shadow: 0 10px 24px -10px rgba(0,0,0,0.5), 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);">
+              <div style="font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #F2A6C6; margin-bottom: 5px;">Step</div>
+              <div style="font-size: 12px; color: #D8DEEC; line-height: 1.4;">Tag severity P1–P3</div>
+            </div>
+            <div style="position: absolute; top: 160px; left: 410px; width: 150px; border-radius: 16px; padding: 12px 14px; background: #16233D; box-shadow: 0 10px 24px -10px rgba(0,0,0,0.5), 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);">
+              <div style="font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #F2A6C6; margin-bottom: 5px;">Decision</div>
+              <div style="font-size: 12px; color: #D8DEEC; line-height: 1.4;">Legal or refund &gt; ฿5,000?</div>
+            </div>
+            <div style="position: absolute; top: 210px; left: 130px; width: 150px; border-radius: 16px; padding: 12px 14px; background: #16233D; box-shadow: 0 10px 24px -10px rgba(0,0,0,0.5), 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);">
+              <div style="font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #F2A6C6; margin-bottom: 5px;">Step</div>
+              <div style="font-size: 12px; color: #D8DEEC; line-height: 1.4;">Draft first reply</div>
+            </div>
+            <div style="position: absolute; top: 300px; left: 130px; width: 150px; border-radius: 16px; padding: 12px 14px; background: #16233D; opacity: 0.7; box-shadow: 4px 4px 10px rgba(0,0,0,0.35), -3px -3px 8px rgba(255,255,255,0.06); border: 1px dashed rgba(255,255,255,0.2);">
+              <div style="font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #F2A6C6; margin-bottom: 5px;">Output</div>
+              <div style="font-size: 12px; color: #D8DEEC; line-height: 1.4;">Post as draft, flag for review</div>
+            </div>
+            <div style="position: absolute; bottom: 14px; left: 20px; font-size: 11px; color: #5C6684;">◇ Click a node to edit in the form · connections set execution order</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

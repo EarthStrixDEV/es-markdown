@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ES Markdown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; background: #0B1626; font-family: 'Sora', system-ui, sans-serif; }
+    h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; margin: 0; }
+    p { margin: 0; }
+    a { color: #F2A6C6; text-decoration: none; }
+    a:hover { color: #F6C4DA; }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-thumb { background: #22335A; border-radius: 8px; }
+    @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+    @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(.7); } }
+    @keyframes scrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  </style>
+</head>
+<body>
+<div style="width: 1440px; background: #0B1626; color: #F6EFE4;">
+
+  <!-- ===== NAV ===== -->
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 16px 56px; background: rgba(16,30,54,0.85); border-bottom: 1px solid rgba(246,239,228,0.10);">
+    <div style="display: flex; align-items: center; gap: 10px; font-family: 'Fraunces', serif; font-weight: 600; font-size: 19px;">
+      <div style="width: 34px; height: 34px; border-radius: 11px; background: linear-gradient(145deg, #F2A6C6, #C64C80); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #2A0A17; font-size: 15px; box-shadow: 6px 6px 14px rgba(0,0,0,0.35), -4px -4px 10px rgba(255,255,255,0.06);">M</div>
+      ES Markdown
+    </div>
+    <div style="display: flex; gap: 28px;">
+      <a href="#" style="color: #C9D2E4; font-size: 14px; font-weight: 500;">Markdown</a>
+      <a href="#" style="color: #C9D2E4; font-size: 14px; font-weight: 500;">Editor</a>
+      <a href="#" style="color: #C9D2E4; font-size: 14px; font-weight: 500;">Agentic</a>
+      <a href="#" style="color: #C9D2E4; font-size: 14px; font-weight: 500;">Templates</a>
+      <a href="#" style="color: #C9D2E4; font-size: 14px; font-weight: 500;">Docs</a>
+    </div>
+    <div style="background: #F2A6C6; color: #3A0E22; font-weight: 700; font-size: 14px; padding: 11px 20px; border-radius: 12px; box-shadow: 0 10px 22px -10px rgba(242,166,198,0.6);">Start writing</div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <div style="position: relative; padding: 96px 56px 120px; background: radial-gradient(ellipse 900px 500px at 18% -10%, rgba(224,105,154,0.22), transparent 60%), radial-gradient(ellipse 700px 500px at 100% 0%, rgba(50,72,115,0.55), transparent 60%), #101E36; border-bottom: 1px solid rgba(246,239,228,0.10); overflow: hidden;">
+    <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 64px; align-items: center;">
+
+      <div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px;">
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #F2A6C6; box-shadow: 0 0 0 4px rgba(242,166,198,0.25);"></div>
+          <span style="font-weight: 700; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #F2A6C6;">Form in, Markdown out</span>
+        </div>
+        <h1 style="font-size: 60px; font-weight: 600; line-height: 0.98; letter-spacing: -0.01em; color: #F6EFE4;">You know what<br>you need. <em style="font-style: italic; font-weight: 500; color: #F2A6C6;">Typing it</em><br>is the hard part.</h1>
+        <p style="margin-top: 24px; font-size: 18px; color: #C9D2E4; max-width: 560px; line-height: 1.6;">Answer a few plain questions — ES Markdown assembles the headings, guardrails, and structure AI models actually parse well. No blank page, no forgotten section.</p>
+
+        <div style="margin-top: 40px; display: flex; align-items: center; gap: 8px; background: #22335A; border-radius: 20px; padding: 8px 8px 8px 22px; box-shadow: 7px 7px 16px rgba(0,0,0,0.35), -5px -5px 13px rgba(255,255,255,0.06); max-width: 560px;">
+          <div style="flex: 1; font-size: 15px; color: #8C97B3;">What are you building? e.g. "landing page for a coffee roastery"</div>
+          <div style="background: #F2A6C6; color: #3A0E22; font-weight: 700; font-size: 14px; padding: 13px 22px; border-radius: 14px; white-space: nowrap;">Generate →</div>
+        </div>
+        <div style="margin-top: 14px; display: flex; gap: 18px; font-size: 13px; color: #8C97B3;">
+          <span><span style="font-family: 'JetBrains Mono', monospace; background: #16233D; padding: 2px 7px; border-radius: 6px; border: 1px solid rgba(246,239,228,0.10); font-size: 12px;">⌘K</span> to jump in anywhere</span>
+          <span>Website · Data summary · Agent instruction · Proposal</span>
+        </div>
+
+        <div style="display: flex; gap: 36px; margin-top: 48px;">
+          <div><div style="font-family: 'Fraunces', serif; font-size: 30px; font-weight: 600;">11</div><div style="font-size: 13px; color: #8C97B3; margin-top: 2px;">guided fields per topic</div></div>
+          <div><div style="font-family: 'Fraunces', serif; font-size: 30px; font-weight: 600;">4</div><div style="font-size: 13px; color: #8C97B3; margin-top: 2px;">output formats</div></div>
+          <div><div style="font-family: 'Fraunces', serif; font-size: 30px; font-weight: 600;">0</div><div style="font-size: 13px; color: #8C97B3; margin-top: 2px;">blank sections, ever</div></div>
+        </div>
+      </div>
+
+      <!-- typing preview panel -->
+      <div style="background: #101E36; border-radius: 28px; box-shadow: 0 20px 50px -18px rgba(0,0,0,0.55), 8px 8px 20px rgba(0,0,0,0.35), -6px -6px 16px rgba(255,255,255,0.06); overflow: hidden; border: 1px solid rgba(255,255,255,0.06);">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.07);">
+          <div style="display: flex; gap: 7px;">
+            <span style="width: 11px; height: 11px; border-radius: 50%; background: #F2A6C6; display: block;"></span>
+            <span style="width: 11px; height: 11px; border-radius: 50%; background: #E8D48A; display: block;"></span>
+            <span style="width: 11px; height: 11px; border-radius: 50%; background: #8FCBA8; display: block;"></span>
+          </div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8C97B3;">agent-instruction.md</div>
+          <div style="width: 40px;"></div>
+        </div>
+        <div style="padding: 26px 24px 30px; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.85; color: #D8DEEC; min-height: 340px;">
+          <div><span style="color: #5C6684;"># </span><span style="color: #F2A6C6; font-weight: 600;">Support Triage Agent</span></div>
+          <div>&nbsp;</div>
+          <div style="color: #9FB4E8;">## Role</div>
+          <div>First-line triage for inbound support tickets.</div>
+          <div>&nbsp;</div>
+          <div style="color: #9FB4E8;">## Instruction</div>
+          <div><span style="color: #E8D48A;">-</span> Read the ticket and prior thread</div>
+          <div><span style="color: #E8D48A;">-</span> Tag severity: P1 / P2 / P3</div>
+          <div><span style="color: #E8D48A;">-</span> Draft a first reply, don't send</div>
+          <div>&nbsp;</div>
+          <div style="color: #9FB4E8;">## Rule</div>
+          <div>Never close a ticket without human sign-off<span style="display: inline-block; width: 7px; height: 1.1em; background: #F2A6C6; vertical-align: text-bottom; animation: blink 1s steps(1) infinite;"></span></div>
+        </div>
+        <div style="padding: 14px 24px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #5C6684;">
+          <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(242,166,198,0.12); color: #F2A6C6; padding: 4px 10px; border-radius: 999px; font-weight: 600; font-size: 11px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #F2A6C6; display: inline-block; animation: pulse 1.6s ease-in-out infinite;"></span>Live preview</span>
+          <span>1,204 chars · 6/6 sections</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== LOGO STRIP ===== -->
+  <div style="padding: 56px 0; background: #0B1626;">
+    <p style="text-align: center; color: #8C97B3; font-size: 13px; margin-bottom: 30px;">Formatted for the models you already use</p>
+    <div style="overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);">
+      <div style="display: flex; gap: 64px; width: max-content; align-items: center; padding: 0 32px;">
+        <div style="display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; color: #8C97B3; white-space: nowrap;"><span style="width: 22px; height: 22px; border-radius: 7px; background: #10A37F; display: block;"></span>ChatGPT</div>
+        <div style="display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; color: #8C97B3; white-space: nowrap;"><span style="width: 22px; height: 22px; border-radius: 7px; background: #4285F4; display: block;"></span>Gemini</div>
+        <div style="display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; color: #8C97B3; white-space: nowrap;"><span style="width: 22px; height: 22px; border-radius: 7px; background: #D97757; display: block;"></span>Claude</div>
+        <div style="display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; color: #8C97B3; white-space: nowrap;"><span style="width: 22px; height: 22px; border-radius: 7px; background: #000000; display: block;"></span>Grok</div>
+        <div style="display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; color: #8C97B3; white-space: nowrap;"><span style="width: 22px; height: 22px; border-radius: 7px; background: #7C5CFF; display: block;"></span>Mistral</div>
+        <div style="display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; color: #8C97B3; white-space: nowrap;"><span style="width: 22px; height: 22px; border-radius: 7px; background: #00A6FB; display: block;"></span>Perplexity</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== WHY SECTION ===== -->
+  <div style="padding: 100px 56px; background: #101E36; border-top: 1px solid rgba(246,239,228,0.10); border-bottom: 1px solid rgba(246,239,228,0.10);">
+    <div style="max-width: 640px; margin-bottom: 56px;">
+      <span style="font-weight: 700; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #F2A6C6;">Why ES Markdown</span>
+      <h2 style="font-size: 40px; font-weight: 600; margin-top: 14px;">The gap isn't your first prompt. It's the follow-up you never send.</h2>
+      <p style="margin-top: 18px; color: #C9D2E4; font-size: 17px;">General users get one shot and stop at "okay, thanks." Power users iterate. We close that gap by writing the structure for you — and handing you the follow-ups too.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+      <div style="background: #16233D; border-radius: 24px; padding: 32px 28px; box-shadow: 7px 7px 16px rgba(0,0,0,0.35), -5px -5px 13px rgba(255,255,255,0.06);">
+        <div style="width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: #22335A; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06); margin-bottom: 22px; font-size: 20px;">🧩</div>
+        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">Every section, every time</h3>
+        <p style="color: #C9D2E4; font-size: 15px; line-height: 1.65;">Skip a field and ES Markdown fills it with a sensible default instead of leaving a gap. Answer 5 of 11 fields, still get a complete document.</p>
+      </div>
+      <div style="background: #16233D; border-radius: 24px; padding: 32px 28px; box-shadow: 7px 7px 16px rgba(0,0,0,0.35), -5px -5px 13px rgba(255,255,255,0.06);">
+        <div style="width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: #22335A; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06); margin-bottom: 22px; font-size: 20px;">👁️</div>
+        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">See it build, live</h3>
+        <p style="color: #C9D2E4; font-size: 15px; line-height: 1.65;">The Markdown preview updates as you type — real formatting or plain text, your call. No surprise when you finally hit copy.</p>
+      </div>
+      <div style="background: #16233D; border-radius: 24px; padding: 32px 28px; box-shadow: 7px 7px 16px rgba(0,0,0,0.35), -5px -5px 13px rgba(255,255,255,0.06);">
+        <div style="width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: #22335A; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(255,255,255,0.06); margin-bottom: 22px; font-size: 20px;">🛡️</div>
+        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">Guardrails baked in</h3>
+        <p style="color: #C9D2E4; font-size: 15px; line-height: 1.65;">Every output closes with an instruction to ask before guessing, and three ready-made follow-ups for when the first answer isn't quite right.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DID YOU KNOW ===== -->
+  <div style="padding: 100px 56px; background: #0B1626;">
+    <div style="background: linear-gradient(135deg, #16233D, #0B1626); border-radius: 32px; padding: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; box-shadow: 0 20px 50px -18px rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden;">
+      <div>
+        <span style="font-weight: 700; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #F2A6C6;">Did you know</span>
+        <h2 style="color: #F6EFE4; font-size: 34px; margin-top: 14px; line-height: 1.15;">AI models don't just <span style="color: #F2A6C6;">tolerate</span> Markdown.<br>They were trained to <span style="color: #F2A6C6;">expect</span> it.</h2>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 18px;">
+        <div style="display: flex; gap: 16px; align-items: flex-start; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 18px 20px; border-radius: 16px;">
+          <div style="font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; color: #F2A6C6; min-width: 70px;">#1</div>
+          <p style="color: #C9D2E4; font-size: 14px; line-height: 1.55;"><strong style="color: #F6EFE4;">Markdown is the most common structuring format</strong> in the instruction-tuning data used to train modern chat models — headings and lists map directly to how they were taught to parse intent.</p>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 18px 20px; border-radius: 16px;">
+          <div style="font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; color: #F2A6C6; min-width: 70px;">↓</div>
+          <p style="color: #C9D2E4; font-size: 14px; line-height: 1.55;"><strong style="color: #F6EFE4;">Clear section headers reduce ambiguity</strong> — models answer the "## Constraints" block differently than a constraint buried mid-paragraph.</p>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 18px 20px; border-radius: 16px;">
+          <div style="font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; color: #F2A6C6; min-width: 70px;">⇄</div>
+          <p style="color: #C9D2E4; font-size: 14px; line-height: 1.55;"><strong style="color: #F6EFE4;">It round-trips cleanly</strong> between chat, docs, and code — the same file works as a prompt, a SKILL.md, or a README with no reformatting.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <div style="padding: 100px 56px 120px; background: #101E36; border-top: 1px solid rgba(246,239,228,0.10);">
+    <div style="text-align: center; max-width: 600px; margin: 0 auto 56px;">
+      <span style="font-weight: 700; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #F2A6C6;">From people who write prompts for a living</span>
+      <h2 style="font-size: 40px; font-weight: 600; margin-top: 14px;">What builders, power users, and engineers say</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+      <div style="background: #16233D; border-radius: 24px; padding: 30px 26px; box-shadow: 7px 7px 16px rgba(0,0,0,0.35), -5px -5px 13px rgba(255,255,255,0.06); display: flex; flex-direction: column; gap: 20px;">
+        <span style="align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #E0699A; background: rgba(242,166,198,0.16); padding: 5px 12px; border-radius: 999px;">Developer</span>
+        <p style="font-size: 15px; line-height: 1.65; color: #F6EFE4;">I used to keep a <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #E0699A;">prompt-template.md</span> I'd copy-paste and hand-edit every time. This is that file, except it fills itself in and never lets me forget the guardrail section.</p>
+        <div style="display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 6px; border-top: 1px solid rgba(246,239,228,0.10);">
+          <div style="width: 38px; height: 38px; border-radius: 12px; flex: none; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 600; font-size: 15px; color: #2A0A17; background: linear-gradient(145deg, #F2A6C6, #E0699A);">NT</div>
+          <div><div style="font-weight: 600; font-size: 14px;">Nut T.</div><div style="font-size: 12px; color: #8C97B3;">Backend developer, fintech</div></div>
+        </div>
+      </div>
+      <div style="background: #16233D; border-radius: 24px; padding: 30px 26px; box-shadow: 7px 7px 16px rgba(0,0,0,0.35), -5px -5px 13px rgba(255,255,255,0.06); display: flex; flex-direction: column; gap: 20px;">
+        <span style="align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #E0699A; background: rgba(242,166,198,0.16); padding: 5px 12px; border-radius: 999px;">Power AI user</span>
+        <p style="font-size: 15px; line-height: 1.65; color: #F6EFE4;">The default values are the real feature. I can see exactly what gets filled in if I skip a field — so leaving something blank never feels like a gamble.</p>
+        <div style="display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 6px; border-top: 1px solid rgba(246,239,228,0.10);">
+          <div style="width: 38px; height: 38px; border-radius: 12px; flex: none; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 600; font-size: 15px; color: #2A0A17; background: linear-gradient(145deg, #9FB4E8, #324873);">PW</div>
+          <div><div style="font-weight: 600; font-size: 14px;">Ploy W.</div><div style="font-size: 12px; color: #8C97B3;">Daily Claude + GPT user</div></div>
+        </div>
+      </div>
+      <div style="background: #16233D; border-radius: 24px; padding: 30px 26px; box-shadow: 7px 7px 16px rgba(0,0,0,0.35), -5px -5px 13px rgba(255,255,255,0.06); display: flex; flex-direction: column; gap: 20px;">
+        <span style="align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #E0699A; background: rgba(242,166,198,0.16); padding: 5px 12px; border-radius: 999px;">AI engineer</span>
+        <p style="font-size: 15px; line-height: 1.65; color: #F6EFE4;">We standardized our internal SKILL.md files on this. Junior folks who've never hand-rolled a system prompt now ship ones with the same structure as our senior agents.</p>
+        <div style="display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 6px; border-top: 1px solid rgba(246,239,228,0.10);">
+          <div style="width: 38px; height: 38px; border-radius: 12px; flex: none; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 600; font-size: 15px; color: #2A0A17; background: linear-gradient(145deg, #E8D48A, #B99A3E);">KS</div>
+          <div><div style="font-weight: 600; font-size: 14px;">Kritt S.</div><div style="font-size: 12px; color: #8C97B3;">ML platform engineer</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <div style="padding: 48px 56px; background: #0B1626; border-top: 1px solid rgba(246,239,228,0.10); display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: flex; align-items: center; gap: 10px; color: #8C97B3; font-size: 14px;">
+      <div style="width: 26px; height: 26px; border-radius: 9px; background: linear-gradient(145deg, #F2A6C6, #C64C80); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #2A0A17; font-size: 12px;">M</div>
+      ES Markdown — write once, format for none.
+    </div>
+    <div style="display: flex; gap: 24px;">
+      <a href="#" style="color: #8C97B3; font-size: 14px;">Markdown</a>
+      <a href="#" style="color: #8C97B3; font-size: 14px;">Agentic</a>
+      <a href="#" style="color: #8C97B3; font-size: 14px;">GitHub</a>
+      <a href="#" style="color: #8C97B3; font-size: 14px;">Privacy</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

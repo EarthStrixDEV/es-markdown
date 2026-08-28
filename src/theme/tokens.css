@@ -1,0 +1,122 @@
+/*
+ * ES Markdown design tokens.
+ * Dark values are extracted verbatim from the wireframe HTML
+ * (markdown-workspace.html / markdown-editor.html / agentic-module.html / home.html).
+ * Light values are authored: cream surfaces, warm-brown text, shadows re-derived
+ * with a rgba(58,51,39,…) dark part and a soft white glint.
+ * No hex color may exist outside this file (exception: theme-script fallback).
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* Surface ramp */
+  --surface-0: #0b1626;
+  --surface-1: #101e36;
+  --surface-2: #16233d;
+  --surface-3: #22335a;
+
+  /* Text ramp */
+  --text-1: #f6efe4;
+  --text-2: #c9d2e4;
+  --text-3: #8c97b3;
+  --text-4: #5c6684;
+  --text-preview: #d8deec;
+
+  /* Pink set */
+  --pink: #f2a6c6;
+  --pink-soft: #f6c4da;
+  --pink-strong: #e0699a;
+  --pink-deep: #c64c80;
+  --on-pink: #3a0e22;
+  --pink-ink-deep: #2a0a17;
+
+  /* Accents */
+  --blue: #9fb4e8;
+  --blue-deep: #324873;
+  --gold: #e8d48a;
+  --gold-deep: #b99a3e;
+  --warn: #e68b8b;
+  --green: #8fcba8;
+
+  /* Hairline border */
+  --hairline: rgba(246, 239, 228, 0.1);
+
+  /* AI-brand logo colors (home logo strip) — identical in both themes */
+  --brand-chatgpt: #10a37f;
+  --brand-gemini: #4285f4;
+  --brand-claude: #d97757;
+  --brand-grok: #000000;
+  --brand-mistral: #7c5cff;
+  --brand-perplexity: #00a6fb;
+
+  /* Clay shadows */
+  --shadow-outset-lg: 7px 7px 16px rgba(0, 0, 0, 0.35),
+    -5px -5px 13px rgba(255, 255, 255, 0.06);
+  --shadow-outset-sm: 4px 4px 10px rgba(0, 0, 0, 0.35),
+    -3px -3px 8px rgba(255, 255, 255, 0.06);
+  --shadow-inset: inset 3px 3px 8px rgba(0, 0, 0, 0.35),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.06);
+  --shadow-pink-glow: 0 8px 18px -8px rgba(242, 166, 198, 0.7);
+  --shadow-float: 0 20px 50px -18px rgba(0, 0, 0, 0.55);
+
+  /* Radius scale */
+  --r-xs: 7px;
+  --r-sm: 9px;
+  --r-md: 11px;
+  --r-lg: 13px;
+  --r-xl: 18px;
+  --r-2xl: 26px;
+  --r-pill: 999px;
+
+  /* Font families (variables provided by next/font in layout.tsx) */
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-body: var(--font-sora), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+
+  /* Surface ramp — cream */
+  --surface-0: #fbf7ef;
+  --surface-1: #f6efe4;
+  --surface-2: #ede2ce;
+  --surface-3: #e2d3b8;
+
+  /* Text ramp — warm brown */
+  --text-1: #3a3327;
+  --text-2: #56503f;
+  --text-3: #837a63;
+  --text-4: #a89d82;
+  --text-preview: #4a4232;
+
+  /* Pink set — strong/deep swapped forward for contrast on cream */
+  --pink: #e0699a;
+  --pink-soft: #f2a6c6;
+  --pink-strong: #c64c80;
+  --pink-deep: #a83464;
+  --on-pink: #fff4f9;
+  --pink-ink-deep: #ffe9f2;
+
+  /* Accents — deepened for cream backgrounds */
+  --blue: #4a6398;
+  --blue-deep: #324873;
+  --gold: #9a7d2a;
+  --gold-deep: #7c631f;
+  --warn: #c05555;
+  --green: #3f8a61;
+
+  /* Hairline border */
+  --hairline: rgba(58, 51, 39, 0.12);
+
+  /* Clay shadows — warm-brown dark part + soft white glint */
+  --shadow-outset-lg: 7px 7px 16px rgba(58, 51, 39, 0.18),
+    -5px -5px 13px rgba(255, 255, 255, 0.85);
+  --shadow-outset-sm: 4px 4px 10px rgba(58, 51, 39, 0.16),
+    -3px -3px 8px rgba(255, 255, 255, 0.8);
+  --shadow-inset: inset 3px 3px 8px rgba(58, 51, 39, 0.14),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.75);
+  --shadow-pink-glow: 0 8px 18px -8px rgba(224, 105, 154, 0.55);
+  --shadow-float: 0 20px 50px -18px rgba(58, 51, 39, 0.25);
+}

@@ -1,5 +1,7 @@
 'use client';
 
+import { getStrings } from '@/data/i18n';
+import { useLanguage } from '@/i18n/useLanguage';
 import { Toolbar } from './Toolbar';
 import { useMarkdownEditor } from './useMarkdownEditor';
 import './toolbar.css';
@@ -20,10 +22,11 @@ export function MarkdownEditPane({
   label = 'Markdown source',
   textareaClassName,
 }: MarkdownEditPaneProps) {
+  const { lang } = useLanguage();
   const { toolbarProps, textareaProps } = useMarkdownEditor({ value, onChange });
   return (
     <div className="mep">
-      <Toolbar {...toolbarProps} />
+      <Toolbar strings={getStrings(lang)} {...toolbarProps} />
       <textarea
         {...textareaProps}
         className={`mep-textarea${textareaClassName ? ` ${textareaClassName}` : ''}`}

@@ -135,8 +135,11 @@ Deliberately **not** in v1: running prompts against a real AI (this app writes
 instructions, it isn't a client), user accounts or cross-device history, a
 workflow canvas, and automatic Thai→Latin name transliteration.
 
-Next up: Thai UI/content (the i18n layer is already in place), the "Ask for a pattern"
-assistant, and a blind test of the core hypothesis before investing further.
+The UI ships in **English and Thai** (TH/EN toggle in the top bar); Studio content is
+English-only for now.
+
+Next up: Thai content for Studio, the "Ask for a pattern" assistant, and a blind test
+of the core hypothesis before investing further.
 
 ---
 

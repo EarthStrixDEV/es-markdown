@@ -1,11 +1,16 @@
 import { en } from './en';
+import { th } from './th';
 import type { Locale, Strings } from './types';
 
-const LOCALES: Record<Locale, Strings> = { en };
+/* getStrings falls back to English for unknown/unloaded locales. */
+const LOCALES: Partial<Record<Locale, Strings>> = { en, th };
 
 /** Resolve a Strings bundle; unknown/unloaded locales fall back to English. */
 export function getStrings(locale?: string): Strings {
-  if (locale && locale in LOCALES) return LOCALES[locale as Locale];
+  if (locale) {
+    const bundle = LOCALES[locale as Locale];
+    if (bundle) return bundle;
+  }
   return en;
 }
 

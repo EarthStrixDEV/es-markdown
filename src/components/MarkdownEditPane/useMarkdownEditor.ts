@@ -118,7 +118,7 @@ export function useMarkdownEditor({ value, onChange }: UseMarkdownEditorOptions)
     }
   }
 
-  const toolbarProps: ToolbarProps = {
+  const toolbarProps: Omit<ToolbarProps, 'strings'> = {
     onInline: (marker: InlineMarker) => runAction((st) => applyInline(st, marker)),
     onBlock: (style: BlockStyle) => runAction((st) => applyBlock(st, style)),
     onList: (kind: ListKind) => runAction((st) => applyList(st, kind)),

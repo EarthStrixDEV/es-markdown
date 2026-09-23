@@ -1,0 +1,21 @@
+{
+  "designedBy": "พลอย (Lead Planner)",
+  "date": "2026-08-28",
+  "requirement": "Continue v1 to spec completion — remaining gap: TH/EN language toggle (specification.md §5)",
+  "plan": "C:/Users/mis/.claude/plans/implement-continue-to-completely-smooth-ullman.md",
+  "features": [
+    {
+      "id": "lang-toggle",
+      "layers": ["ui"],
+      "chain": "T8 (types+en extract) -> T9a (th dictionary) || T9b (store/hook/script/toggle/font) -> T10 (wire consumers) -> T11 (tests+build+browser QA)",
+      "notes": "Single-feature round. Generator half already i18n-parameterized (assembler untouched). Security surface minimal (no network, localStorage via existing safe helpers) — โบว์ audits once over the full diff after T11."
+    }
+  ],
+  "revisions": [
+    {
+      "date": "2026-08-28",
+      "by": "พลอย",
+      "change": "T11 follow-up: localize HistoryList relative-time labels (spec §5 'ALL app-authored UI text'). FakeWindow home-hero demo content stays EN by design — it is illustrative markdown artwork tied to the typing animation, not a label/DEF/guardrail per §5 acceptance; same class as MODEL_LOGOS proper nouns."
+    }
+  ]
+}

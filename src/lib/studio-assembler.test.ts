@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  getStudioStrings,
   STUDIO_TYPES,
   studioCommonFields,
   studioEn,
@@ -140,5 +141,36 @@ describe('studio assembler — resolution', () => {
       const g = JSON.parse(toJson(t, {})).guardrail;
       expect(g).toBe((isMedia ? media : text).guardrail.body);
     }
+  });
+});
+
+describe('Thai output', () => {
+  const th = getStudioStrings('th');
+  const en = getStudioStrings('en');
+
+  it('uses Thai section headings and the Thai text guardrail for a text type', () => {
+    const md = toMarkdown('code', {}, th);
+    expect(md).toContain(`## ${th.common.task.label}`);
+    expect(md).toContain(th.guardrails.text.guardrail.body);
+    expect(md).not.toContain(`## ${en.common.task.label}\n`);
+  });
+
+  it('uses the Thai media guardrail and follow-ups for a media type', () => {
+    const md = toMarkdown('image', {}, th);
+    expect(md).toContain(th.guardrails.media.guardrail.body);
+    for (const item of th.guardrails.media.followUps.items) expect(md).toContain(item);
+  });
+
+  it('keeps JSON keys in English with Thai values', () => {
+    const obj = JSON.parse(toJson('image', {}, th));
+    expect(Object.keys(obj)).toEqual(Object.keys(JSON.parse(toJson('image', {}, en))));
+    expect(Object.keys(obj.params)).toEqual(['aspectRatio', 'visualStyle', 'subject', 'negativePrompt']);
+    expect(obj.task).toBe(th.common.task.def);
+  });
+
+  it('plain output keeps Thai labels and has no Markdown syntax', () => {
+    const plain = toPlain('music', {}, th);
+    expect(plain).toContain(`${th.common.context.label.toUpperCase()}:`);
+    expect(plain).not.toMatch(/#|\*\*|```/);
   });
 });

@@ -185,7 +185,7 @@ Per the plan's confirmed decisions and spec §7 non-goals:
 | Check | Result |
 |---|---|
 | `npm run lint` (tsc) | ☑ no errors |
-| `npm run test` (Vitest) | ☑ 10 files, 112/112 tests passed |
+| `npm run test` (Vitest) | ☑ 11 files, 126/126 tests passed (after the Studio TH work) |
 | `npm run build` (static export) | ☑ passed, `/studio` exported as a static route |
 
 ## Studio (`/studio`) — PASS (partial, see untested)
@@ -197,6 +197,15 @@ Per the plan's confirmed decisions and spec §7 non-goals:
 - ☑ Invalid JSON edit shows an inline `Invalid JSON: …` line; editing still works
 - ☑ Save to history → reload → the entry persists (localStorage); clicking it restores type, values, and locked state
 - ☑ Light and dark themes render correctly
+
+## Studio in Thai (TH/EN) — PASS
+
+- ☑ Toggling TH switches Studio labels, buttons, type list, "If empty" hints, and tabs to Thai
+- ☑ Unlocked output re-renders in Thai: headings, defaults, and guardrail
+- ☑ Image in TH: extra fields are Thai, and the Thai media guardrail is present
+- ☑ JSON in TH keeps English keys with Thai values, and parses
+- ☑ Edit the output (locked), then toggle EN: the edited text is byte-identical and the lock is kept. Regenerate then produces English.
+- ☑ Save in TH: the history meta shows the Thai type label and Thai relative time. No console errors.
 
 ## Editor regression after toolbar extraction — PASS
 

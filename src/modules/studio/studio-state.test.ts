@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { getStudioStrings } from '@/data/studio';
 import { assembleAll } from '@/lib/studio-assembler';
 import { STUDIO_FORMATS } from '@/lib/studio-history';
 import {
@@ -116,5 +117,40 @@ describe('studioReducer', () => {
     let s = studioReducer(withTask('A'), { type: 'editOutput', format: 'json', text: '{}' });
     s = studioReducer(s, { type: 'loadHistory', entry: toHistoryEntry(s, 1, 'x') });
     expect(studioReducer(s, { type: 'reset' })).toEqual(initialStudioState());
+  });
+});
+
+describe('studioReducer locale', () => {
+  const th = () => getStudioStrings('th');
+
+  it('setLocale recomputes outputs in the new language while unlocked', () => {
+    const s = studioReducer(withTask('A'), { type: 'setLocale', locale: 'th' });
+    const expected = assembleAll('code', { task: 'A' }, th());
+    expect(s.locale).toBe('th');
+    for (const f of STUDIO_FORMATS) expect(s.outputs[f]).toEqual({ text: expected[f], edited: false });
+  });
+
+  it('setLocale while locked keeps every output byte-identical', () => {
+    const locked = studioReducer(withTask('A'), { type: 'editOutput', format: 'json', text: '{"mine":1}' });
+    const s = studioReducer(locked, { type: 'setLocale', locale: 'th' });
+    expect(s.locale).toBe('th');
+    expect(s.locked).toBe(true);
+    expect(s.outputs).toEqual(locked.outputs);
+  });
+
+  it('regenerate after a locked setLocale produces the new language', () => {
+    let s = studioReducer(withTask('A'), { type: 'editOutput', format: 'plain', text: 'mine' });
+    s = studioReducer(s, { type: 'setLocale', locale: 'th' });
+    s = studioReducer(s, { type: 'regenerate' });
+    const expected = assembleAll('code', { task: 'A' }, th());
+    expect(s.locked).toBe(false);
+    for (const f of STUDIO_FORMATS) expect(s.outputs[f].text).toBe(expected[f]);
+  });
+
+  it('setField and reset keep the current locale', () => {
+    let s = studioReducer(initialStudioState(), { type: 'setLocale', locale: 'th' });
+    s = studioReducer(s, { type: 'setField', key: 'task', value: 'B' });
+    expect(s.outputs.markdown.text).toBe(assembleAll('code', { task: 'B' }, th()).markdown);
+    expect(studioReducer(s, { type: 'reset' }).locale).toBe('th');
   });
 });

@@ -1,11 +1,11 @@
 import { studioEn } from './en';
+import { studioTh } from './th';
 import type { Locale } from '../i18n/types';
 import type { StudioStrings } from './types';
 
-/* Studio content is EN-only for now; locales without a bundle fall back to English. */
-const LOCALES: Partial<Record<Locale, StudioStrings>> = { en: studioEn };
+const LOCALES: Record<Locale, StudioStrings> = { en: studioEn, th: studioTh };
 
-/** Resolve the Studio strings bundle; unknown or not-yet-translated locales fall back to English. */
+/** Resolve the Studio strings bundle; unknown locales fall back to English. */
 export function getStudioStrings(locale?: string): StudioStrings {
   return (locale && LOCALES[locale as Locale]) || studioEn;
 }

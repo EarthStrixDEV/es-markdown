@@ -12,7 +12,7 @@ every section present, every time, no matter how few fields you fill in.
 [![Next.js](https://img.shields.io/badge/Next.js-15-101426?logo=nextdotjs&logoColor=white)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19-101426?logo=react&logoColor=white)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-101426?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Tests](https://img.shields.io/badge/tests-112%20passing-4F46E5?logo=vitest&logoColor=white)](#-testing)
+[![Tests](https://img.shields.io/badge/tests-126%20passing-4F46E5?logo=vitest&logoColor=white)](#-testing)
 [![No backend](https://img.shields.io/badge/backend-none%20%E2%9C%A8-4F46E5)](#-tech--architecture)
 
 </div>
@@ -121,9 +121,9 @@ three-message follow-up pack below a divider.
 
 ## ✅ Testing
 
-112 unit tests (Vitest) covering:
+126 unit tests (Vitest) covering:
 - the Workspace and Studio assemblers: every output format, default resolution, guardrail placement, Thai name passthrough, and JSON validity
-- the Studio lock/regenerate state and history store
+- the Studio lock/regenerate state (incl. TH/EN switching), history store, and TH/EN Studio string parity
 - toolbar text transformations and grouped undo/redo
 - state reducers
 
@@ -135,11 +135,11 @@ Deliberately **not** in v1: running prompts against a real AI (this app writes
 instructions, it isn't a client), user accounts or cross-device history, a
 workflow canvas, and automatic Thai→Latin name transliteration.
 
-The UI ships in **English and Thai** (TH/EN toggle in the top bar); Studio content is
-English-only for now.
+The UI and generated output ship in **English and Thai** (TH/EN toggle in the top bar),
+Studio included.
 
-Next up: Thai content for Studio, the "Ask for a pattern" assistant, and a blind test
-of the core hypothesis before investing further.
+Next up: the "Ask for a pattern" assistant, and a blind test of the core hypothesis before
+investing further.
 
 ---
 

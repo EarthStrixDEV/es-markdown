@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { getStrings } from '@/data/i18n';
+import { useLanguage } from '@/i18n/useLanguage';
 import {
   fillTemplate,
   getStudioStrings,
@@ -57,9 +58,16 @@ function CheckIcon() {
 }
 
 export function StudioPage() {
-  const ui = getStrings('en').ui;
-  const strings = getStudioStrings('en');
-  const [state, dispatch] = useReducer(studioReducer, undefined, initialStudioState);
+  const { lang } = useLanguage();
+  const shared = getStrings(lang);
+  const ui = shared.ui;
+  const strings = getStudioStrings(lang);
+  const [state, dispatch] = useReducer(studioReducer, undefined, () => initialStudioState());
+
+  /* Follow the app language; the reducer leaves hand-edited (locked) outputs untouched. */
+  useEffect(() => {
+    dispatch({ type: 'setLocale', locale: lang });
+  }, [lang]);
   const [history, setHistory] = useState<StudioHistoryEntry[]>([]);
   const [saved, setSaved] = useState(false);
   const savedTimer = useRef<number | null>(null);
@@ -107,7 +115,7 @@ export function StudioPage() {
     <div className="ws st">
       <StudioSidebar
         strings={strings}
-        historyTitle={ui.history}
+        shared={shared}
         activeType={state.type}
         typesDisabled={state.locked}
         history={history}
@@ -158,6 +166,7 @@ export function StudioPage() {
             text={state.outputs[state.activeFormat].text}
             staleFormats={staleFormats}
             copyLabel={ui.copy}
+            numberLocale={shared.locale === 'th' ? 'th-TH' : 'en-US'}
             ui={strings.ui}
             onSelect={(format) => dispatch({ type: 'setActiveFormat', format })}
             onEdit={(format, text) => dispatch({ type: 'editOutput', format, text })}

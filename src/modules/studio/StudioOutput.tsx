@@ -13,6 +13,8 @@ interface StudioOutputProps {
   text: string;
   staleFormats: ReadonlySet<StudioFormat>;
   copyLabel: string;
+  /** BCP 47 locale for the char count, e.g. 'th-TH'. */
+  numberLocale: string;
   ui: StudioUiStrings;
   onSelect: (format: StudioFormat) => void;
   onEdit: (format: StudioFormat, text: string) => void;
@@ -32,6 +34,7 @@ export function StudioOutput({
   text,
   staleFormats,
   copyLabel,
+  numberLocale,
   ui,
   onSelect,
   onEdit,
@@ -106,7 +109,7 @@ export function StudioOutput({
 
         <footer className="ws-preview-foot">
           <span className="ws-chip">
-            {fillTemplate(ui.charCount, { count: text.length.toLocaleString('en-US') })}
+            {fillTemplate(ui.charCount, { count: text.length.toLocaleString(numberLocale) })}
           </span>
           <CopyButton label={copyLabel} getText={() => text} />
         </footer>

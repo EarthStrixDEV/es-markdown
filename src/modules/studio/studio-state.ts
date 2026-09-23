@@ -4,7 +4,8 @@
  * `regenerate` rebuilds all outputs from the current values and unlocks.
  */
 
-import type { StudioFieldKey, StudioType, StudioValues } from '@/data/studio';
+import { getStudioStrings, type StudioFieldKey, type StudioType, type StudioValues } from '@/data/studio';
+import type { Locale } from '@/data/i18n/types';
 import { assembleAll } from '@/lib/studio-assembler';
 import {
   deriveTitle,
@@ -23,6 +24,8 @@ export interface StudioState {
   locked: boolean;
   activeFormat: StudioFormat;
   entryId: string | null;
+  /** Language of generated outputs; edited outputs are never re-translated. */
+  locale: Locale;
 }
 
 export type StudioAction =
@@ -32,26 +35,28 @@ export type StudioAction =
   | { type: 'regenerate' }
   | { type: 'setActiveFormat'; format: StudioFormat }
   | { type: 'loadHistory'; entry: StudioHistoryEntry }
+  | { type: 'setLocale'; locale: Locale }
   | { type: 'reset' };
 
 export const DEFAULT_STUDIO_TYPE: StudioType = 'code';
 export const DEFAULT_STUDIO_FORMAT: StudioFormat = 'markdown';
 
-function assembleOutputs(type: StudioType, values: StudioValues): StudioOutputs {
-  const texts = assembleAll(type, values);
+function assembleOutputs(type: StudioType, values: StudioValues, locale: Locale): StudioOutputs {
+  const texts = assembleAll(type, values, getStudioStrings(locale));
   return Object.fromEntries(
     STUDIO_FORMATS.map((f) => [f, { text: texts[f], edited: false }]),
   ) as StudioOutputs;
 }
 
-export function initialStudioState(): StudioState {
+export function initialStudioState(locale: Locale = 'en'): StudioState {
   return {
     type: DEFAULT_STUDIO_TYPE,
     values: {},
-    outputs: assembleOutputs(DEFAULT_STUDIO_TYPE, {}),
+    outputs: assembleOutputs(DEFAULT_STUDIO_TYPE, {}, locale),
     locked: false,
     activeFormat: DEFAULT_STUDIO_FORMAT,
     entryId: null,
+    locale,
   };
 }
 
@@ -62,14 +67,14 @@ export function studioReducer(state: StudioState, action: StudioAction): StudioS
       return {
         ...state,
         type: action.studioType,
-        outputs: assembleOutputs(action.studioType, state.values),
+        outputs: assembleOutputs(action.studioType, state.values, state.locale),
       };
     }
 
     case 'setField': {
       if (state.locked) return state;
       const values = { ...state.values, [action.key]: action.value };
-      return { ...state, values, outputs: assembleOutputs(state.type, values) };
+      return { ...state, values, outputs: assembleOutputs(state.type, values, state.locale) };
     }
 
     case 'editOutput':
@@ -80,7 +85,7 @@ export function studioReducer(state: StudioState, action: StudioAction): StudioS
       };
 
     case 'regenerate':
-      return { ...state, locked: false, outputs: assembleOutputs(state.type, state.values) };
+      return { ...state, locked: false, outputs: assembleOutputs(state.type, state.values, state.locale) };
 
     case 'setActiveFormat':
       return state.activeFormat === action.format
@@ -101,8 +106,19 @@ export function studioReducer(state: StudioState, action: StudioAction): StudioS
       };
     }
 
+    case 'setLocale': {
+      if (action.locale === state.locale) return state;
+      // Locked outputs hold the user's edits: switch the language only, never re-translate.
+      if (state.locked) return { ...state, locale: action.locale };
+      return {
+        ...state,
+        locale: action.locale,
+        outputs: assembleOutputs(state.type, state.values, action.locale),
+      };
+    }
+
     case 'reset':
-      return initialStudioState();
+      return initialStudioState(state.locale);
 
     default:
       return state;

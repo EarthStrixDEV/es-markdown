@@ -7,13 +7,14 @@ import {
   type StudioStrings,
   type StudioType,
 } from '@/data/studio';
+import type { Strings } from '@/data/i18n/types';
 import type { StudioHistoryEntry } from '@/lib/studio-history';
 import { StudioIcon } from './StudioIcon';
 
 interface StudioSidebarProps {
   strings: StudioStrings;
-  /** Shared Workspace label. */
-  historyTitle: string;
+  /** Shared app strings: History title and relative-time labels. */
+  shared: Strings;
   activeType: StudioType;
   /** Locked form: switching type would silently discard edits, so it's blocked. */
   typesDisabled: boolean;
@@ -24,18 +25,20 @@ interface StudioSidebarProps {
   onDelete: (entry: StudioHistoryEntry) => void;
 }
 
-function timeLabel(savedAt: number): string {
+/* Same relative-time rules and strings as Workspace's HistoryList. */
+function timeLabel(savedAt: number, shared: Strings): string {
   const mins = Math.round((Date.now() - savedAt) / 60000);
-  if (mins < 1) return 'just now';
-  if (mins < 60) return `${mins}m ago`;
+  if (mins < 1) return shared.ui.timeJustNow;
+  if (mins < 60) return shared.ui.timeMinutesAgo.replace('{n}', String(mins));
   const hours = Math.round(mins / 60);
-  if (hours < 24) return `${hours}h ago`;
-  return new Date(savedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  if (hours < 24) return shared.ui.timeHoursAgo.replace('{n}', String(hours));
+  const locale = shared.locale === 'th' ? 'th-TH' : 'en-US';
+  return new Date(savedAt).toLocaleDateString(locale, { month: 'short', day: 'numeric' });
 }
 
 export function StudioSidebar({
   strings,
-  historyTitle,
+  shared,
   activeType,
   typesDisabled,
   history,
@@ -72,7 +75,7 @@ export function StudioSidebar({
       </div>
 
       <div className="ws-history">
-        <div className="ws-side-title">{historyTitle}</div>
+        <div className="ws-side-title">{shared.ui.history}</div>
         {history.length === 0 ? (
           <p className="ws-history-empty">{strings.ui.historyEmpty}</p>
         ) : (
@@ -85,7 +88,7 @@ export function StudioSidebar({
                 <button type="button" className="ws-history-item" onClick={() => onLoad(entry)}>
                   <span className="ws-history-title">{entry.title}</span>
                   <span className="ws-history-meta">
-                    {strings.types[entry.type].label} · {timeLabel(entry.savedAt)}
+                    {strings.types[entry.type].label} · {timeLabel(entry.savedAt, shared)}
                   </span>
                 </button>
                 <button

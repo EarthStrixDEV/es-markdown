@@ -3,6 +3,8 @@ import {
   studioCommonFields,
   studioExtraFields,
   studioGuardrailSet,
+  studioOtherKeys,
+  type StudioExtraFieldKey,
   type StudioFieldDef,
   type StudioStrings,
   type StudioType,
@@ -33,15 +35,36 @@ function splitList(text: string): string[] {
     .filter((l) => l !== '');
 }
 
+/** Selected preset ids from a stored option value, in preset order. */
+export function parseOptionValue(field: StudioFieldDef, stored: string | undefined): string[] {
+  const picked = new Set(splitList(stored ?? ''));
+  return (field.options ?? []).filter((id) => picked.has(id));
+}
+
+/** Option field → selected preset labels + trimmed "Other" text, else DEF lines. */
+function resolveOptions(field: StudioFieldDef, values: StudioValues): string[] {
+  const items = parseOptionValue(field, values[field.id]).map(
+    (id) => field.optionLabels?.[id] ?? id,
+  );
+  const other = field.otherKey ? values[field.otherKey]?.trim() : '';
+  if (other) items.push(other);
+  return items.length > 0 ? items : splitList(field.def);
+}
+
 function resolveField(field: StudioFieldDef, values: StudioValues): ResolvedSection {
+  if (field.options) return { field, value: resolveOptions(field, values) };
   const raw = values[field.id]?.trim() || field.def;
   return { field, value: field.list ? splitList(raw) : raw };
 }
 
 function resolveAll(type: StudioType, values: StudioValues, strings: StudioStrings) {
+  const otherKeys = studioOtherKeys(type);
   return {
     common: studioCommonFields(strings).map((f) => resolveField(f, values)),
-    extra: studioExtraFields(type, strings).map((f) => resolveField(f, values)),
+    // "Other" companions are folded into their option field, never emitted alone.
+    extra: studioExtraFields(type, strings)
+      .filter((f) => !otherKeys.has(f.id as StudioExtraFieldKey))
+      .map((f) => resolveField(f, values)),
     set: studioGuardrailSet(type, strings),
     title: `${strings.types[type].label} prompt`,
   };
@@ -131,4 +154,3 @@ export function assembleAll(
     markdown: toMarkdown(type, values, strings),
   };
 }
-

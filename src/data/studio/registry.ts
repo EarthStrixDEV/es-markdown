@@ -17,6 +17,15 @@ import {
  * text live in the strings bundle (en.ts).
  */
 
+export const IMAGE_STYLE_OPTIONS = ['photorealistic', 'cartoon', '3d', 'sketch', 'clay'] as const;
+export const VIDEO_STYLE_OPTIONS = [
+  'cinematic',
+  'anime',
+  '3d-animation',
+  'stop-motion',
+  'documentary',
+] as const;
+
 export interface StudioTypeEntry {
   id: StudioType;
   icon: StudioIconId;
@@ -45,13 +54,23 @@ export const STUDIO_REGISTRY: Record<StudioType, StudioTypeEntry> = {
     id: 'new-project',
     icon: 'folder',
     kind: 'text',
-    extraFields: [{ id: 'stack' }, { id: 'scope', multiline: true, list: true }, { id: 'platform' }],
+    extraFields: [
+      { id: 'stack' },
+      { id: 'scope', multiline: true, list: true },
+      { id: 'platform' },
+    ],
   },
   image: {
     id: 'image',
     icon: 'image',
     kind: 'media',
     extraFields: [
+      {
+        id: 'imageStyle',
+        options: IMAGE_STYLE_OPTIONS,
+        otherKey: 'imageStyleOther',
+      },
+      { id: 'imageStyleOther' },
       { id: 'aspectRatio' },
       { id: 'visualStyle' },
       { id: 'subject', multiline: true },
@@ -63,6 +82,12 @@ export const STUDIO_REGISTRY: Record<StudioType, StudioTypeEntry> = {
     icon: 'video',
     kind: 'media',
     extraFields: [
+      {
+        id: 'videoStyle',
+        options: VIDEO_STYLE_OPTIONS,
+        otherKey: 'videoStyleOther',
+      },
+      { id: 'videoStyleOther' },
       { id: 'duration' },
       { id: 'shot', multiline: true },
       { id: 'visualStyle' },
@@ -124,7 +149,10 @@ export const STUDIO_REGISTRY: Record<StudioType, StudioTypeEntry> = {
 
 /** The 7 common fields resolved with locale text, in form order. */
 export function studioCommonFields(strings: StudioStrings = getStudioStrings()): StudioFieldDef[] {
-  return STUDIO_COMMON_FIELD_KEYS.map((k) => ({ ...STUDIO_COMMON_FIELDS[k], ...strings.common[k] }));
+  return STUDIO_COMMON_FIELD_KEYS.map((k) => ({
+    ...STUDIO_COMMON_FIELDS[k],
+    ...strings.common[k],
+  }));
 }
 
 /** A type's extra fields resolved with locale text, in form order. */
@@ -137,6 +165,13 @@ export function studioExtraFields(
     if (!text) throw new Error(`Missing Studio strings for ${type}.${shape.id}`);
     return { ...shape, ...text };
   });
+}
+
+/** Extra field ids that are only the "Other" companion of an option field. */
+export function studioOtherKeys(type: StudioType): Set<StudioExtraFieldKey> {
+  const keys = new Set<StudioExtraFieldKey>();
+  for (const f of STUDIO_REGISTRY[type].extraFields) if (f.otherKey) keys.add(f.otherKey);
+  return keys;
 }
 
 /** Guardrail + follow-ups for a type (media set for media kinds). */

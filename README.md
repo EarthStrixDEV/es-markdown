@@ -12,7 +12,7 @@ every section present, every time, no matter how few fields you fill in.
 [![Next.js](https://img.shields.io/badge/Next.js-15-101426?logo=nextdotjs&logoColor=white)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19-101426?logo=react&logoColor=white)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-101426?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Tests](https://img.shields.io/badge/tests-126%20passing-4F46E5?logo=vitest&logoColor=white)](#-testing)
+[![Tests](https://img.shields.io/badge/tests-135%20passing-4F46E5?logo=vitest&logoColor=white)](#-testing)
 [![No backend](https://img.shields.io/badge/backend-none%20%E2%9C%A8-4F46E5)](#-tech--architecture)
 
 </div>
@@ -63,6 +63,7 @@ messages for when the first answer isn't quite right.
 ### Studio
 - **11 prompt types**: Code, New Project, Image, Video, Audio/Voice, Music, Agent Task, Research, Content, Ideation, Other
 - **7 common fields**: Task, Context, Audience/Role, Constraints, Output, Tone/Style, Examples. Each type adds its own fields, e.g. Image adds aspect ratio and negative prompt, Music adds genre, BPM, and vocals.
+- **Style presets for Image and Video** (multi-select chips + "Other" free text): Photorealistic · Cartoon · 3D · Sketch · Clay for images; Cinematic · Anime · 3D Animation · Stop-motion · Documentary for video.
 - Three outputs from one form:
   - **Plain text**: `TASK:`-style labels.
   - **JSON**: keyed fields plus a `params` object for automation.
@@ -121,7 +122,7 @@ three-message follow-up pack below a divider.
 
 ## ✅ Testing
 
-126 unit tests (Vitest) covering:
+135 unit tests (Vitest) covering:
 - the Workspace and Studio assemblers: every output format, default resolution, guardrail placement, Thai name passthrough, and JSON validity
 - the Studio lock/regenerate state (incl. TH/EN switching), history store, and TH/EN Studio string parity
 - toolbar text transformations and grouped undo/redo

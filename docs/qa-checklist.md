@@ -185,7 +185,7 @@ Per the plan's confirmed decisions and spec §7 non-goals:
 | Check | Result |
 |---|---|
 | `npm run lint` (tsc) | ☑ no errors |
-| `npm run test` (Vitest) | ☑ 11 files, 126/126 tests passed (after the Studio TH work) |
+| `npm run test` (Vitest) | ☑ 11 files, 135/135 tests passed (after Studio TH + style presets) |
 | `npm run build` (static export) | ☑ passed, `/studio` exported as a static route |
 
 ## Studio (`/studio`) — PASS (partial, see untested)
@@ -206,6 +206,14 @@ Per the plan's confirmed decisions and spec §7 non-goals:
 - ☑ JSON in TH keeps English keys with Thai values, and parses
 - ☑ Edit the output (locked), then toggle EN: the edited text is byte-identical and the lock is kept. Regenerate then produces English.
 - ☑ Save in TH: the history meta shows the Thai type label and Thai relative time. No console errors.
+
+## Studio style presets (Image / Video) — PASS
+
+- ☑ Image shows the Photorealistic / Cartoon / 3D / Sketch / Clay / Other chips. Empty → `params.imageStyle: ["Photorealistic"]`
+- ☑ Clicking Clay then 3D gives `["3D","Clay"]` (preset order). Other + "Watercolor" appends it, and the Markdown shows a "Style preset" list
+- ☑ Video shows its own presets with none carried over from Image. Video params never include `imageStyle`
+- ☑ In TH the preset names stay English, "อื่นๆ" and "สไตล์สำเร็จรูป" are Thai, and the chips are disabled while the form is locked
+- ☑ Save → reload → load from history restores the pressed chips (Anime, Stop-motion)
 
 ## Editor regression after toolbar extraction — PASS
 

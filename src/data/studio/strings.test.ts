@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { studioEn } from './en';
 import { studioTh } from './th';
 import { getStudioStrings } from './strings';
-import { STUDIO_TYPES } from './types';
+import { STUDIO_REGISTRY } from './registry';
+import { STUDIO_TYPES, type StudioExtraFieldKey } from './types';
 
 /** Every leaf path ("a.b.0") in a nested object/array, sorted. */
 function keyPaths(value: unknown, prefix = ''): string[] {
@@ -51,6 +52,25 @@ describe('studio Thai bundle', () => {
     for (const [key, value] of Object.entries(en)) {
       if (typeof value !== 'string') continue;
       expect(tokens(th[key] as string), key).toEqual(tokens(value));
+    }
+  });
+
+  it('every preset id has a non-empty EN and TH label, plus an Other label', () => {
+    for (const t of STUDIO_TYPES) {
+      for (const f of STUDIO_REGISTRY[t].extraFields) {
+        if (!f.options) continue;
+        for (const bundle of [studioEn, studioTh]) {
+          const text = bundle.types[t].fields[f.id as StudioExtraFieldKey];
+          for (const id of f.options) {
+            expect(
+              text?.optionLabels?.[id]?.trim(),
+              `${bundle.locale} ${t}.${f.id}.${id}`,
+            ).toBeTruthy();
+          }
+          expect(text?.otherLabel?.trim()).toBeTruthy();
+          if (f.otherKey) expect(bundle.types[t].fields[f.otherKey]).toBeDefined();
+        }
+      }
     }
   });
 

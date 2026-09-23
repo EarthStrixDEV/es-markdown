@@ -1,6 +1,7 @@
 'use client';
 
 import { Field } from '@/components/Field';
+import { ChipSelect } from './ChipSelect';
 import {
   fillTemplate,
   type StudioFieldDef,
@@ -35,20 +36,32 @@ export function StudioForm({
   onChange,
   onRegenerate,
 }: StudioFormProps) {
-  const renderField = (f: StudioFieldDef) => (
-    <Field
-      key={`${type}-${f.id}`}
-      className={f.multiline ? 'field-wide' : undefined}
-      label={f.label}
-      placeholder={f.placeholder}
-      hint={f.def}
-      hintLabel={ifEmptyLabel}
-      required={f.required}
-      rows={f.multiline ? 3 : 1}
-      value={values[f.id] ?? ''}
-      onChange={(value) => onChange(f.id, value)}
-    />
-  );
+  // "Other" companions render inside their ChipSelect, not as their own Field.
+  const otherKeys = new Set<StudioFieldKey | undefined>(extraFields.map((f) => f.otherKey));
+  const renderField = (f: StudioFieldDef) =>
+    f.options ? (
+      <ChipSelect
+        key={`${type}-${f.id}`}
+        field={f}
+        otherField={extraFields.find((o) => o.id === f.otherKey)}
+        values={values}
+        hintLabel={ifEmptyLabel}
+        onChange={onChange}
+      />
+    ) : (
+      <Field
+        key={`${type}-${f.id}`}
+        className={f.multiline ? 'field-wide' : undefined}
+        label={f.label}
+        placeholder={f.placeholder}
+        hint={f.def}
+        hintLabel={ifEmptyLabel}
+        required={f.required}
+        rows={f.multiline ? 3 : 1}
+        value={values[f.id] ?? ''}
+        onChange={(value) => onChange(f.id, value)}
+      />
+    );
 
   return (
     <section className="ws-form" aria-label={fillTemplate(ui.formLabel, { type: typeLabel })}>
@@ -72,7 +85,9 @@ export function StudioForm({
           <legend className="st-group-title">
             {fillTemplate(ui.typeGroup, { type: typeLabel })}
           </legend>
-          <div className="ws-form-grid">{extraFields.map(renderField)}</div>
+          <div className="ws-form-grid">
+            {extraFields.filter((f) => !otherKeys.has(f.id)).map(renderField)}
+          </div>
         </fieldset>
       )}
     </section>

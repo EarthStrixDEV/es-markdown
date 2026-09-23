@@ -99,6 +99,24 @@ export const studioTh: StudioStrings = {
           placeholder: 'เช่น 16:9',
           def: '1:1',
         },
+        imageStyle: {
+          label: 'สไตล์สำเร็จรูป',
+          placeholder: 'เลือกได้มากกว่าหนึ่งแบบ',
+          def: 'Photorealistic',
+          optionLabels: {
+            photorealistic: 'Photorealistic',
+            cartoon: 'Cartoon',
+            '3d': '3D',
+            sketch: 'Sketch',
+            clay: 'Clay',
+          },
+          otherLabel: 'อื่นๆ',
+        },
+        imageStyleOther: {
+          label: 'สไตล์อื่น',
+          placeholder: 'เช่น ภาพสีน้ำ',
+          def: 'ไม่มี',
+        },
         visualStyle: {
           label: 'สไตล์ภาพ',
           placeholder: 'เช่น สีน้ำนุ่ม ๆ โทนสีหม่น',
@@ -129,6 +147,24 @@ export const studioTh: StudioStrings = {
           label: 'ช็อต / กล้อง',
           placeholder: 'เช่น ค่อย ๆ dolly-in ระดับสายตา เลนส์ 35mm',
           def: 'Medium shot ระดับสายตา ค่อย ๆ push-in อย่างนิ่งนวล ไม่มีการตัดต่อ',
+        },
+        videoStyle: {
+          label: 'สไตล์สำเร็จรูป',
+          placeholder: 'เลือกได้มากกว่าหนึ่งแบบ',
+          def: 'Cinematic',
+          optionLabels: {
+            cinematic: 'Cinematic',
+            anime: 'Anime',
+            '3d-animation': '3D Animation',
+            'stop-motion': 'Stop-motion',
+            documentary: 'Documentary',
+          },
+          otherLabel: 'อื่นๆ',
+        },
+        videoStyleOther: {
+          label: 'สไตล์อื่น',
+          placeholder: 'เช่น ภาพสีน้ำ',
+          def: 'ไม่มี',
         },
         visualStyle: {
           label: 'สไตล์',
@@ -318,8 +354,7 @@ export const studioTh: StudioStrings = {
     historyEmpty: 'ยังไม่มีรายการที่บันทึก — สร้าง prompt แล้วกดบันทึก',
     deleteEntryLabel: 'ลบ "{title}" ออกจากประวัติ',
     confirmDelete: 'ลบ "{title}" ออกจากประวัติใช่ไหม',
-    confirmRegenerate:
-      'สร้างผลลัพธ์ทั้งหมดใหม่จากฟอร์มใช่ไหม สิ่งที่แก้ไขในผลลัพธ์จะถูกเขียนทับ',
+    confirmRegenerate: 'สร้างผลลัพธ์ทั้งหมดใหม่จากฟอร์มใช่ไหม สิ่งที่แก้ไขในผลลัพธ์จะถูกเขียนทับ',
     lockedBanner: 'ผลลัพธ์ถูกแก้ไขแล้ว — ฟอร์มถูกล็อก',
     regenerate: 'สร้างใหม่จากฟอร์ม',
     formLabel: 'ฟอร์ม prompt ประเภท {type}',

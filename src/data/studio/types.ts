@@ -61,6 +61,10 @@ export type StudioExtraFieldKey =
   | 'scope'
   | 'platform'
   | 'aspectRatio'
+  | 'imageStyle'
+  | 'imageStyleOther'
+  | 'videoStyle'
+  | 'videoStyleOther'
   | 'visualStyle'
   | 'subject'
   | 'negativePrompt'
@@ -94,6 +98,13 @@ export interface StudioFieldShape {
   /** Newline-split into a list by the assembler. */
   list?: boolean;
   required?: boolean;
+  /** Preset ids — the field renders as multi-select chips. Stored as the
+      selected ids joined by '
+', in preset order. */
+  options?: readonly string[];
+  /** Companion free-text field for the "Other" chip; folded into this field
+      by the assembler and never emitted on its own. */
+  otherKey?: StudioExtraFieldKey;
 }
 
 export interface StudioFieldStrings {
@@ -101,6 +112,10 @@ export interface StudioFieldStrings {
   placeholder: string;
   /** "If empty" default — never blank. */
   def: string;
+  /** Display label per preset id (option fields only). */
+  optionLabels?: Record<string, string>;
+  /** Label of the "Other" chip (option fields only). */
+  otherLabel?: string;
 }
 
 /** A fully resolved field: shape + locale text. */
@@ -108,6 +123,8 @@ export interface StudioFieldDef extends StudioFieldShape {
   label: string;
   placeholder: string;
   def: string;
+  optionLabels?: Record<string, string>;
+  otherLabel?: string;
 }
 
 /** Raw form input keyed by field id. Missing/blank → field default. */

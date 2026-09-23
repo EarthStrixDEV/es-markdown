@@ -14,7 +14,8 @@ export const studioEn: StudioStrings = {
   common: {
     task: {
       label: 'Task',
-      placeholder: 'What should the AI produce? e.g. "Write a migration that adds a status column to orders"',
+      placeholder:
+        'What should the AI produce? e.g. "Write a migration that adds a status column to orders"',
       def: 'Complete the request described in the context below and return one finished result, not a plan for one.',
     },
     context: {
@@ -57,7 +58,7 @@ export const studioEn: StudioStrings = {
         language: {
           label: 'Language / Stack',
           placeholder: 'e.g. TypeScript, Next.js 15, React 19',
-          def: "Infer the language from the existing code; if there is none, use TypeScript and say so.",
+          def: 'Infer the language from the existing code; if there is none, use TypeScript and say so.',
         },
         existingCode: {
           label: 'Existing code',
@@ -96,6 +97,24 @@ export const studioEn: StudioStrings = {
           placeholder: 'e.g. 16:9',
           def: '1:1',
         },
+        imageStyle: {
+          label: 'Style preset',
+          placeholder: 'Pick one or more',
+          def: 'Photorealistic',
+          optionLabels: {
+            photorealistic: 'Photorealistic',
+            cartoon: 'Cartoon',
+            '3d': '3D',
+            sketch: 'Sketch',
+            clay: 'Clay',
+          },
+          otherLabel: 'Other',
+        },
+        imageStyleOther: {
+          label: 'Other style',
+          placeholder: 'e.g. Watercolor',
+          def: 'None',
+        },
         visualStyle: {
           label: 'Visual style',
           placeholder: 'e.g. Soft watercolor, muted palette',
@@ -126,6 +145,24 @@ export const studioEn: StudioStrings = {
           label: 'Shot / Camera',
           placeholder: 'e.g. Slow dolly-in, eye level, 35mm',
           def: 'Medium shot at eye level, slow steady push-in, no cuts.',
+        },
+        videoStyle: {
+          label: 'Style preset',
+          placeholder: 'Pick one or more',
+          def: 'Cinematic',
+          optionLabels: {
+            cinematic: 'Cinematic',
+            anime: 'Anime',
+            '3d-animation': '3D Animation',
+            'stop-motion': 'Stop-motion',
+            documentary: 'Documentary',
+          },
+          otherLabel: 'Other',
+        },
+        videoStyleOther: {
+          label: 'Other style',
+          placeholder: 'e.g. Watercolor',
+          def: 'None',
         },
         visualStyle: {
           label: 'Style',

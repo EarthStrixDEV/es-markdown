@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { href: '/markdown', label: 'Markdown' },
   { href: '/editor', label: 'Editor' },
   { href: '/agentic', label: 'Agentic' },
+  { href: '/studio', label: 'Studio' },
 ] as const;
 
 function isActive(pathname: string, href: string): boolean {

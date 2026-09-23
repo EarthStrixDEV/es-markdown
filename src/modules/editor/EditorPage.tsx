@@ -1,23 +1,11 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { CopyButton } from '@/components/CopyButton';
 import { MarkdownPreview } from '@/components/MarkdownPreview';
 import { SAMPLE_DOC } from '@/data/sample-doc';
 import { renderMarkdown } from '@/lib/markdown';
-import {
-  applyBlock,
-  applyInline,
-  applyList,
-  insertSnippet,
-  type BlockStyle,
-  type EditState,
-  type InlineMarker,
-  type ListKind,
-  type SnippetKind,
-} from './actions';
-import { classifyInput, useHistory } from './useHistory';
-import { Toolbar } from './Toolbar';
+import { Toolbar, useMarkdownEditor } from '@/components/MarkdownEditPane';
 import './editor.css';
 
 const PREVIEW_DEBOUNCE_MS = 80;
@@ -57,12 +45,10 @@ function CheckIcon() {
 }
 
 export function EditorPage() {
-  const taRef = useRef<HTMLTextAreaElement>(null);
-  const restoreSel = useRef(false);
-  const { present, canUndo, canRedo, input, replace, undo, redo } = useHistory({
-    text: SAMPLE_DOC,
-    selStart: 0,
-    selEnd: 0,
+  const [text, setTextValue] = useState(SAMPLE_DOC);
+  const { text: currentText, toolbarProps, textareaProps, setText } = useMarkdownEditor({
+    value: text,
+    onChange: setTextValue,
   });
 
   const [previewMd, setPreviewMd] = useState(SAMPLE_DOC);
@@ -72,17 +58,9 @@ export function EditorPage() {
 
   /* Debounced preview: typing on the left renders on the right ~80ms later. */
   useEffect(() => {
-    const t = window.setTimeout(() => setPreviewMd(present.text), PREVIEW_DEBOUNCE_MS);
+    const t = window.setTimeout(() => setPreviewMd(currentText), PREVIEW_DEBOUNCE_MS);
     return () => window.clearTimeout(t);
-  }, [present.text]);
-
-  /* Restore caret/selection after every programmatic change (toolbar, undo…). */
-  useLayoutEffect(() => {
-    if (!restoreSel.current || !taRef.current) return;
-    restoreSel.current = false;
-    taRef.current.focus();
-    taRef.current.setSelectionRange(present.selStart, present.selEnd);
-  }, [present]);
+  }, [currentText]);
 
   useEffect(
     () => () => {
@@ -91,59 +69,8 @@ export function EditorPage() {
     [],
   );
 
-  /* Selection truth at action time is the DOM, not the last input event. */
-  function currentState(): EditState {
-    const ta = taRef.current;
-    return {
-      text: present.text,
-      selStart: ta ? ta.selectionStart : present.selStart,
-      selEnd: ta ? ta.selectionEnd : present.selEnd,
-    };
-  }
-
-  function runAction(fn: (state: EditState) => EditState) {
-    restoreSel.current = true;
-    replace(fn(currentState()));
-  }
-
-  const onInline = (marker: InlineMarker) => runAction((st) => applyInline(st, marker));
-  const onBlock = (style: BlockStyle) => runAction((st) => applyBlock(st, style));
-  const onList = (kind: ListKind) => runAction((st) => applyList(st, kind));
-  const onSnippet = (kind: SnippetKind) => runAction((st) => insertSnippet(st, kind));
-
-  const onUndo = () => {
-    restoreSel.current = true;
-    undo();
-  };
-  const onRedo = () => {
-    restoreSel.current = true;
-    redo();
-  };
-
-  function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    const el = e.target;
-    input(
-      { text: el.value, selStart: el.selectionStart, selEnd: el.selectionEnd },
-      classifyInput(present.text, el.value),
-    );
-  }
-
-  function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
-    if (!(e.ctrlKey || e.metaKey)) return;
-    const key = e.key.toLowerCase();
-    if (key === 'z') {
-      e.preventDefault();
-      if (e.shiftKey) onRedo();
-      else onUndo();
-    } else if (key === 'y') {
-      e.preventDefault();
-      onRedo();
-    }
-  }
-
   function handleClear() {
-    restoreSel.current = true;
-    replace({ text: '', selStart: 0, selEnd: 0 });
+    setText('');
   }
 
   function handleSave() {
@@ -154,8 +81,8 @@ export function EditorPage() {
   }
 
   const renderedHtml = useMemo(() => renderMarkdown(previewMd), [previewMd]);
-  const charCount = present.text.length;
-  const lineCount = present.text === '' ? 0 : present.text.split('\n').length;
+  const charCount = currentText.length;
+  const lineCount = currentText === '' ? 0 : currentText.split('\n').length;
 
   return (
     <div className="ed-page">
@@ -184,16 +111,7 @@ export function EditorPage() {
         </div>
       </div>
 
-      <Toolbar
-        onInline={onInline}
-        onBlock={onBlock}
-        onList={onList}
-        onSnippet={onSnippet}
-        onUndo={onUndo}
-        onRedo={onRedo}
-        canUndo={canUndo}
-        canRedo={canRedo}
-      />
+      <Toolbar {...toolbarProps} />
 
       <div className="ed-workbench">
         {/* Plain text pane */}
@@ -206,11 +124,8 @@ export function EditorPage() {
             <span className="ed-pane-meta">draft.md</span>
           </header>
           <textarea
-            ref={taRef}
+            {...textareaProps}
             className="ed-textarea"
-            value={present.text}
-            onChange={handleChange}
-            onKeyDown={handleKeyDown}
             spellCheck={false}
             aria-label="Markdown source"
           />
@@ -218,7 +133,7 @@ export function EditorPage() {
             <span className="ed-pill">
               {charCount} chars · {lineCount} lines
             </span>
-            <CopyButton label="Copy raw" getText={() => present.text} />
+            <CopyButton label="Copy raw" getText={() => currentText} />
           </footer>
         </section>
 
@@ -256,7 +171,7 @@ export function EditorPage() {
           </div>
           <footer className="ed-pane-foot">
             <span className="ed-pill">Formatted · synced</span>
-            <CopyButton label="Copy HTML" getText={() => renderMarkdown(present.text)} />
+            <CopyButton label="Copy HTML" getText={() => renderMarkdown(currentText)} />
           </footer>
         </section>
       </div>

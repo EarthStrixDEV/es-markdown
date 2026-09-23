@@ -9,7 +9,6 @@ import { assembleAgent } from '@/lib/assembler';
 import { slugify } from '@/lib/slugify';
 import { AgentForm } from './AgentForm';
 import { AgentSidebar } from './AgentSidebar';
-import { WorkflowGraph } from './WorkflowGraph';
 import { useAgentsState } from './useAgentsState';
 import './agentic.css';
 
@@ -180,8 +179,6 @@ export function AgenticPage() {
             </footer>
           </section>
         </div>
-
-        <WorkflowGraph strings={strings} />
       </div>
     </div>
   );

@@ -1,27 +1,26 @@
 import type { Metadata } from 'next';
-import { Fraunces, Sora, JetBrains_Mono } from 'next/font/google';
+import { Space_Grotesk, Inter, IBM_Plex_Mono } from 'next/font/google';
 import { ThemeScript } from '@/theme/theme-script';
 import { AppShell } from '@/components/AppShell';
 import '@/theme/tokens.css';
 import './globals.css';
 
-const fraunces = Fraunces({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  axes: ['opsz'],
   weight: 'variable',
-  variable: '--font-fraunces',
+  variable: '--font-space-grotesk',
 });
 
-const sora = Sora({
+const inter = Inter({
   subsets: ['latin'],
   weight: 'variable',
-  variable: '--font-sora',
+  variable: '--font-inter',
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ['latin'],
-  weight: 'variable',
-  variable: '--font-jetbrains-mono',
+  weight: ['400', '500', '600'],
+  variable: '--font-ibm-plex-mono',
 });
 
 export const metadata: Metadata = {
@@ -37,7 +36,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fraunces.variable} ${sora.variable} ${jetbrainsMono.variable}`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${ibmPlexMono.variable}`}
     >
       <head>
         <ThemeScript />

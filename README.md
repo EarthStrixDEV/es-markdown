@@ -9,11 +9,11 @@
 ES Markdown turns form answers into complete, well-structured Markdown instructions for AI —
 every section present, every time, no matter how few fields you fill in.
 
-[![Next.js](https://img.shields.io/badge/Next.js-15-0B1626?logo=nextdotjs&logoColor=F2A6C6)](https://nextjs.org)
-[![React](https://img.shields.io/badge/React-19-0B1626?logo=react&logoColor=F2A6C6)](https://react.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-0B1626?logo=typescript&logoColor=F2A6C6)](https://www.typescriptlang.org)
-[![Tests](https://img.shields.io/badge/tests-75%20passing-16233D?logo=vitest&logoColor=E8D48A)](#-testing)
-[![No backend](https://img.shields.io/badge/backend-none%20%E2%9C%A8-16233D)](#-tech--architecture)
+[![Next.js](https://img.shields.io/badge/Next.js-15-101426?logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-101426?logo=react&logoColor=white)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-101426?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tests](https://img.shields.io/badge/tests-112%20passing-4F46E5?logo=vitest&logoColor=white)](#-testing)
+[![No backend](https://img.shields.io/badge/backend-none%20%E2%9C%A8-4F46E5)](#-tech--architecture)
 
 </div>
 
@@ -30,7 +30,7 @@ Skip a field and it's filled with a sensible, pre-written default — **never le
 never cut**. Every output closes with a fixed guardrail and three ready-made follow-up
 messages for when the first answer isn't quite right.
 
-## 🧩 The four modules
+## 🧩 The five modules
 
 | Module | Route | What it does |
 |---|---|---|
@@ -38,6 +38,7 @@ messages for when the first answer isn't quite right.
 | 📝 **Markdown workspace** | `/markdown` | Guided 9-field form across 5 task topics → **Prompt `.md`** / **`SKILL.md`** / **Workflow `.md`** |
 | ⌨️ **Markdown Editor** | `/editor` | Free-form editor: formatting toolbar, grouped undo/redo, live side-by-side preview |
 | 🤖 **Agentic module** | `/agentic` | 11-field form (Identity / Behavior / Guardrails) → **`AGENT.md`** with YAML frontmatter |
+| 🎛 **Studio** | `/studio` | Any kind of prompt, 11 types → **Plain text** / **JSON** / **Markdown**, freely editable after generation |
 
 ### Markdown workspace
 - **5 topics** — Software Engineering, Research & Brainstorm, Content & Script, Everyday tasks, and Create Agent (hands off to the Agentic module)
@@ -57,13 +58,26 @@ messages for when the first answer isn't quite right.
 - **Safety-first defaults**: an untouched form still produces a complete `AGENT.md` whose
   tools default to `read-only` and whose rules require human sign-off before anything irreversible
 - Live `AGENT.md` preview with YAML frontmatter (`name` slugified for Latin, Thai passes through as-is)
-- Session sidebar for multiple agents + a static workflow-graph teaser (clearly labeled preview-only)
+- Session sidebar for multiple agents
+
+### Studio
+- **11 prompt types**: Code, New Project, Image, Video, Audio/Voice, Music, Agent Task, Research, Content, Ideation, Other
+- **7 common fields**: Task, Context, Audience/Role, Constraints, Output, Tone/Style, Examples. Each type adds its own fields, e.g. Image adds aspect ratio and negative prompt, Music adds genre, BPM, and vocals.
+- Three outputs from one form:
+  - **Plain text**: `TASK:`-style labels.
+  - **JSON**: keyed fields plus a `params` object for automation.
+  - **Markdown**.
+- **Edit the output directly.** The first edit locks the form, and **Regenerate** rebuilds from it after a confirm. The other formats are flagged *not in sync with your edits*.
+- Every type ends with a guardrail + 3 follow-ups. Image, video, audio, and music get a media-specific set.
+- History is saved in `localStorage`, up to 50 entries.
 
 ## 🎨 Design
 
-Claymorphism in **dark navy · cream · light pink** — soft inset/outset shadows, generous radii.
+Clean, light-first UI adopted from ResumeLoka:
+- **Colors**: white surfaces, `#101426` ink, and an **indigo `#4F46E5`** primary, with green/amber/red/violet status colors.
+- **Shapes**: soft long card shadows and 10–20px radii.
 
-- **Fraunces** for display, **Sora** for UI, **JetBrains Mono** for Markdown
+- **Space Grotesk** for display, **Inter** for UI, **IBM Plex Mono** for Markdown
 - Full **light/dark themes** — follows your OS, remembers your manual choice
 - Responsive from wide desktop down to phone widths
 - Every color, shadow, and radius lives in a single token file: [`src/theme/tokens.css`](src/theme/tokens.css)
@@ -87,17 +101,17 @@ Open http://localhost:3000 — that's it. No environment variables, no database,
 ## 🏗 Tech & architecture
 
 **Next.js 15 (App Router) · React 19 · TypeScript · vanilla CSS tokens · [marked](https://github.com/markedjs/marked) — no backend at all.**
-The app is a pure static export; the only persistence is `localStorage` (theme), always
+The app is a pure static export; the only persistence is `localStorage` (theme + Studio history), always
 wrapped in try/catch so a blocked-storage browser still works fine.
 
 ```
 src/
-├─ app/          routes (/, /markdown, /editor, /agentic) + layout, fonts, theme bootstrap
+├─ app/          routes (/, /markdown, /editor, /agentic, /studio) + layout, fonts, theme bootstrap
 ├─ theme/        tokens.css (single source of design truth) · no-flash theme script
-├─ components/   AppShell · MarkdownPreview · CopyButton · Field
-├─ lib/          markdown renderer · template assembler · slugify · safe storage
-├─ data/         i18n strings & defaults (EN, TH-ready) · topics · agent fields · templates
-└─ modules/      home / editor / workspace / agentic — one folder per module
+├─ components/   AppShell · MarkdownPreview · MarkdownEditPane (shared toolbar + grouped undo) · CopyButton · Field
+├─ lib/          markdown renderer · template assembler · studio assembler · studio history · slugify · safe storage
+├─ data/         i18n strings & defaults (EN, TH-ready) · topics · agent fields · templates · studio types & strings
+└─ modules/      home / editor / workspace / agentic / studio — one folder per module
 ```
 
 The heart of the app is [`src/lib/assembler.ts`](src/lib/assembler.ts): a pure function
@@ -107,16 +121,19 @@ three-message follow-up pack below a divider.
 
 ## ✅ Testing
 
-75 unit tests (Vitest) covering the assembler (all four output formats, default
-resolution, guardrail placement, Thai name passthrough), toolbar text transformations,
-grouped undo/redo, and state reducers — plus a browser-driven QA pass against the spec's
-acceptance criteria: [`docs/qa-checklist.md`](docs/qa-checklist.md).
+112 unit tests (Vitest) covering:
+- the Workspace and Studio assemblers: every output format, default resolution, guardrail placement, Thai name passthrough, and JSON validity
+- the Studio lock/regenerate state and history store
+- toolbar text transformations and grouped undo/redo
+- state reducers
+
+Browser-driven QA passes are recorded in [`docs/qa-checklist.md`](docs/qa-checklist.md).
 
 ## 🗺 Scope & roadmap
 
 Deliberately **not** in v1: running prompts against a real AI (this app writes
-instructions, it isn't a client), user accounts or cross-device history, a real
-drag-and-drop workflow canvas, and automatic Thai→Latin name transliteration.
+instructions, it isn't a client), user accounts or cross-device history, a
+workflow canvas, and automatic Thai→Latin name transliteration.
 
 Next up: Thai UI/content (the i18n layer is already in place), the "Ask for a pattern"
 assistant, and a blind test of the core hypothesis before investing further.

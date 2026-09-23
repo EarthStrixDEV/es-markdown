@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import type { BlockStyle, InlineMarker, ListKind, SnippetKind } from './actions';
+import './toolbar.css';
 
-interface ToolbarProps {
+export interface ToolbarProps {
   onInline: (marker: InlineMarker) => void;
   onBlock: (style: BlockStyle) => void;
   onList: (kind: ListKind) => void;

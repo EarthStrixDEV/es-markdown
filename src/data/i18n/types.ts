@@ -107,10 +107,6 @@ export type AgentGroupId = 'identity' | 'behavior' | 'guardrails';
 /** The 10 AGENT.md body sections — every field but `name`. */
 export type AgentSectionKey = Exclude<AgentFieldKey, 'name'>;
 
-export interface AgentGraphNodeStrings {
-  kind: string;
-  text: string;
-}
 
 export interface AgentStrings {
   pageSubtitle: string;
@@ -130,14 +126,6 @@ export interface AgentStrings {
   groups: Record<AgentGroupId, string>;
   sections: Record<AgentSectionKey, string>;
   fields: Record<AgentFieldKey, FieldStrings>;
-  graph: {
-    heading: string;
-    optionalBadge: string;
-    previewOnlyBadge: string;
-    paletteChips: string[];
-    canvasHint: string;
-    nodes: AgentGraphNodeStrings[];
-  };
 }
 
 export interface Strings {

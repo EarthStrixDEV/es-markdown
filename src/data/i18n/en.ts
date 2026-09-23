@@ -399,20 +399,5 @@ export const en: Strings = {
         def: 'A human accepts the result without rework, and every action taken is traceable and reversible.',
       },
     },
-
-    graph: {
-      heading: 'Workflow graph',
-      optionalBadge: 'Optional view',
-      previewOnlyBadge: 'Preview only — not saved, not linked to this form',
-      paletteChips: ['+ Role', '+ Step', '+ Decision', '+ Tool', '+ Output'],
-      canvasHint: 'Static preview — nodes and connections are illustrative only.',
-      nodes: [
-        { kind: 'Role', text: 'Support triage, first-line only' },
-        { kind: 'Step', text: 'Tag severity P1–P3' },
-        { kind: 'Decision', text: 'Legal or refund > ฿5,000?' },
-        { kind: 'Step', text: 'Draft first reply' },
-        { kind: 'Output', text: 'Post as draft, flag for review' },
-      ],
-    },
   },
 };

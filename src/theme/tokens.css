@@ -1,46 +1,49 @@
 /*
  * ES Markdown design tokens.
- * Dark values are extracted verbatim from the wireframe HTML
- * (markdown-workspace.html / markdown-editor.html / agentic-module.html / home.html).
- * Light values are authored: cream surfaces, warm-brown text, shadows re-derived
- * with a rgba(58,51,39,…) dark part and a soft white glint.
+ * Theme adopted from ResumeLoka (https://resumeloka.vercel.app/, 2026-09-23):
+ * light values are extracted from its computed styles — white/#f6f8fc surfaces,
+ * #101426 ink, indigo #4f46e5 primary, green/amber/red/violet status colors,
+ * Space Grotesk + Inter + IBM Plex Mono, 10–20px radii, soft long card shadow.
+ * ResumeLoka ships no dark theme; dark values are authored from its #101426 ink.
+ * Token names are legacy (--pink* = primary accent) so component CSS stays untouched.
  * No hex color may exist outside this file (exception: theme-script fallback).
  */
 
 :root {
   color-scheme: dark;
 
-  /* Surface ramp */
-  --surface-0: #0b1626;
-  --surface-1: #101e36;
-  --surface-2: #16233d;
-  --surface-3: #22335a;
+  /* Surface ramp — authored from ResumeLoka ink #101426 */
+  --surface-0: #0a0d1a;
+  --surface-1: #101426;
+  --surface-2: #171c33;
+  --surface-3: #232a47;
 
   /* Text ramp */
-  --text-1: #f6efe4;
-  --text-2: #c9d2e4;
-  --text-3: #8c97b3;
-  --text-4: #5c6684;
-  --text-preview: #d8deec;
+  --text-1: #f6f8fc;
+  --text-2: #c4c8d6;
+  --text-3: #8b91a6;
+  --text-4: #5a6076;
+  --text-preview: #d7dce8;
 
-  /* Pink set */
-  --pink: #f2a6c6;
-  --pink-soft: #f6c4da;
-  --pink-strong: #e0699a;
-  --pink-deep: #c64c80;
-  --on-pink: #3a0e22;
-  --pink-ink-deep: #2a0a17;
+  /* Primary accent (indigo) */
+  --pink: #7c75f0;
+  --pink-soft: #9a94f5;
+  --pink-strong: #6d64ee;
+  --pink-deep: #4f46e5;
+  --on-pink: #ffffff;
+  --pink-ink-deep: #ffffff;
 
   /* Accents */
-  --blue: #9fb4e8;
-  --blue-deep: #324873;
-  --gold: #e8d48a;
-  --gold-deep: #b99a3e;
-  --warn: #e68b8b;
-  --green: #8fcba8;
+  --blue: #7c5cf0;
+  --blue-deep: #4f46e5;
+  --gold: #f6b73c;
+  --gold-deep: #e08a16;
+  --warn: #f0776f;
+  --green: #2fc18d;
 
-  /* Hairline border */
-  --hairline: rgba(246, 239, 228, 0.1);
+  /* Borders */
+  --hairline: rgba(233, 236, 243, 0.1);
+  --hairline-strong: rgba(233, 236, 243, 0.22);
 
   /* AI-brand logo colors (home logo strip) — identical in both themes */
   --brand-chatgpt: #10a37f;
@@ -50,73 +53,73 @@
   --brand-mistral: #7c5cff;
   --brand-perplexity: #00a6fb;
 
-  /* Clay shadows */
-  --shadow-outset-lg: 7px 7px 16px rgba(0, 0, 0, 0.35),
-    -5px -5px 13px rgba(255, 255, 255, 0.06);
-  --shadow-outset-sm: 4px 4px 10px rgba(0, 0, 0, 0.35),
-    -3px -3px 8px rgba(255, 255, 255, 0.06);
-  --shadow-inset: inset 3px 3px 8px rgba(0, 0, 0, 0.35),
-    inset -2px -2px 6px rgba(255, 255, 255, 0.06);
-  --shadow-pink-glow: 0 8px 18px -8px rgba(242, 166, 198, 0.7);
-  --shadow-float: 0 20px 50px -18px rgba(0, 0, 0, 0.55);
+  /* Shadows (legacy names):
+   * outset-lg = card, outset-sm = small raised chip, inset = outlined field,
+   * pink-glow = primary-button glow, float = floating mockup window. */
+  --shadow-outset-lg: 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 14px 40px -22px rgba(0, 0, 0, 0.7);
+  --shadow-outset-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-inset: inset 0 0 0 1px var(--hairline-strong);
+  --shadow-pink-glow: 0 10px 22px -10px rgba(79, 70, 229, 0.75);
+  --shadow-float: 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 24px 60px -24px rgba(0, 0, 0, 0.8);
 
-  /* Radius scale */
-  --r-xs: 7px;
-  --r-sm: 9px;
-  --r-md: 11px;
-  --r-lg: 13px;
-  --r-xl: 18px;
-  --r-2xl: 26px;
+  /* Radius scale — ResumeLoka: 10 (chips), 12 (buttons), 20 (cards), pill */
+  --r-xs: 6px;
+  --r-sm: 8px;
+  --r-md: 10px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-2xl: 20px;
   --r-pill: 999px;
 
   /* Font families (variables provided by next/font in layout.tsx) */
-  --font-display: var(--font-fraunces), Georgia, serif;
-  --font-body: var(--font-sora), system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), monospace;
+  --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), monospace;
 }
 
 [data-theme='light'] {
   color-scheme: light;
 
-  /* Surface ramp — cream */
-  --surface-0: #fbf7ef;
-  --surface-1: #f6efe4;
-  --surface-2: #ede2ce;
-  --surface-3: #e2d3b8;
+  /* Surface ramp — ResumeLoka */
+  --surface-0: #ffffff;
+  --surface-1: #f6f8fc;
+  --surface-2: #ffffff;
+  --surface-3: #e9ecf3;
 
-  /* Text ramp — warm brown */
-  --text-1: #3a3327;
-  --text-2: #56503f;
-  --text-3: #837a63;
-  --text-4: #a89d82;
-  --text-preview: #4a4232;
+  /* Text ramp — ResumeLoka */
+  --text-1: #101426;
+  --text-2: #5a6076;
+  --text-3: #8b91a6;
+  --text-4: #c4c8d6;
+  --text-preview: #101426;
 
-  /* Pink set — strong/deep swapped forward for contrast on cream */
-  --pink: #e0699a;
-  --pink-soft: #f2a6c6;
-  --pink-strong: #c64c80;
-  --pink-deep: #a83464;
-  --on-pink: #fff4f9;
-  --pink-ink-deep: #ffe9f2;
+  /* Primary accent — ResumeLoka indigo */
+  --pink: #4f46e5;
+  --pink-soft: #6158ec;
+  --pink-strong: #4f46e5;
+  --pink-deep: #3f37c9;
+  --on-pink: #ffffff;
+  --pink-ink-deep: #ffffff;
 
-  /* Accents — deepened for cream backgrounds */
-  --blue: #4a6398;
-  --blue-deep: #324873;
-  --gold: #9a7d2a;
-  --gold-deep: #7c631f;
-  --warn: #c05555;
-  --green: #3f8a61;
+  /* Accents — ResumeLoka status colors */
+  --blue: #7c5cf0;
+  --blue-deep: #4f46e5;
+  --gold: #e08a16;
+  --gold-deep: #c47510;
+  --warn: #e0584f;
+  --green: #0ea672;
 
-  /* Hairline border */
-  --hairline: rgba(58, 51, 39, 0.12);
+  /* Borders — ResumeLoka */
+  --hairline: #e9ecf3;
+  --hairline-strong: #d7dce8;
 
-  /* Clay shadows — warm-brown dark part + soft white glint */
-  --shadow-outset-lg: 7px 7px 16px rgba(58, 51, 39, 0.18),
-    -5px -5px 13px rgba(255, 255, 255, 0.85);
-  --shadow-outset-sm: 4px 4px 10px rgba(58, 51, 39, 0.16),
-    -3px -3px 8px rgba(255, 255, 255, 0.8);
-  --shadow-inset: inset 3px 3px 8px rgba(58, 51, 39, 0.14),
-    inset -2px -2px 6px rgba(255, 255, 255, 0.75);
-  --shadow-pink-glow: 0 8px 18px -8px rgba(224, 105, 154, 0.55);
-  --shadow-float: 0 20px 50px -18px rgba(58, 51, 39, 0.25);
+  /* Shadows — ResumeLoka card + primary-button glow */
+  --shadow-outset-lg: 0 1px 2px rgba(16, 20, 38, 0.05),
+    0 14px 40px -22px rgba(16, 20, 38, 0.3);
+  --shadow-outset-sm: 0 1px 2px rgba(16, 20, 38, 0.05);
+  --shadow-pink-glow: 0 10px 22px -10px rgba(79, 70, 229, 0.75);
+  --shadow-float: 0 1px 2px rgba(16, 20, 38, 0.05),
+    0 24px 60px -24px rgba(16, 20, 38, 0.35);
 }

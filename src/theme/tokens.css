@@ -6,7 +6,8 @@
  * Space Grotesk + Inter + IBM Plex Mono, 10–20px radii, soft long card shadow.
  * ResumeLoka ships no dark theme; dark values are authored from its #101426 ink.
  * Token names are legacy (--pink* = primary accent) so component CSS stays untouched.
- * No hex color may exist outside this file (exception: theme-script fallback).
+ * No hex color may exist outside this file (exceptions: theme-script fallback,
+ * src/app/icon.svg — a static favicon cannot read CSS variables).
  */
 
 :root {

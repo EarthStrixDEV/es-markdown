@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useTheme } from '@/theme/useTheme';
 import { useLanguage } from '@/i18n/useLanguage';
 import { getStrings } from '@/data/i18n';
+import { LogoMark } from './Logo';
 import './AppShell.css';
 
 const NAV_ITEMS = [
@@ -73,7 +74,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <header className="shell-topbar">
         <div className="shell-brand">
           <span className="shell-logo" aria-hidden="true">
-            M
+            <LogoMark />
           </span>
           {shell.brand}
         </div>
